@@ -1,0 +1,22 @@
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #1C1C1C;
+}
+canvas {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.canvasZero {
+    z-index: 0;
+}
+
+.canvasOne {
+    z-index: 1;
+}

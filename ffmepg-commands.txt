@@ -1,0 +1,5 @@
+ffmpeg -f image2 -framerate 24 -i ./frames/line/evolutionary-botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p -shortest ./video-renders/evolutionary-botany-line-24fps.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-002/evolutionary-botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p -shortest ./video-renders/evolutionary-botany-line-002-24fps.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-003/evolutionary-botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p -shortest ./video-renders/evolutionary-botany-line-003-24fps.mp4
