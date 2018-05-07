@@ -3,3 +3,13 @@ ffmpeg -f image2 -framerate 24 -i ./frames/line/evolutionary-botany-%05d.png -c:
 ffmpeg -f image2 -framerate 24 -i ./frames/line-002/evolutionary-botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p -shortest ./video-renders/evolutionary-botany-line-002-24fps.mp4
 
 ffmpeg -f image2 -framerate 24 -i ./frames/line-003/evolutionary-botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p -shortest ./video-renders/evolutionary-botany-line-003-24fps.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/evolutionary-botany-line-004-24fps.mp4
+
+———————————————
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -vf palettegen palette-004.png
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -i palette-004.png -lavfi paletteuse -s 720x720 ./video-renders/evolutionary-botany-line-004.gif
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -i palette-004.png -lavfi paletteuse -s 540x540 ./video-renders/evolutionary-botany-line-004.gif
