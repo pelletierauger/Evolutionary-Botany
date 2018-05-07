@@ -1,5 +1,5 @@
 let DNA = function() {
-    this.initialEnergy = 5;
+    this.initialEnergy = 7;
     this.energyLoss = 0.9;
     this.branchGrowth = 1;
     this.branchGrowthCost = 0.01;
