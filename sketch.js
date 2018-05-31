@@ -2,11 +2,11 @@ let tree;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.fileName = "./frames/line-004/evolving-botany";
-    p.maxFrames = 550;
+    p.fileName = "./frames/line-006/botany";
+    p.maxFrames = 250;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         if (!exporting)  {
@@ -16,8 +16,8 @@ var sketch = new p5(function(p) {
         }
         p.background(200);
         // p.fill(255, 50);
-        p.stroke(0);
-        p.strokeWeight(3);
+        p.stroke(0, 150);
+        p.strokeWeight(2);
         // p.noStroke();
         if (!p.looping) {
             p.noLoop();
@@ -27,11 +27,13 @@ var sketch = new p5(function(p) {
     };
 
     p.draw = function() {
-        p.background(200, 50);
+        p.background(200);
         // let s = p.map(p.frameCount, 0, 200, 1, 0.9);
         p.translate(p.width /  2, p.height - 20);
-        p.scale(0.3, 0.3);
-        tree.grow();
+        p.scale(0.6, 0.6);
+        for (let i = 0; i < 2; i++) {
+            tree.grow();
+        }
         tree.draw();
 
 
