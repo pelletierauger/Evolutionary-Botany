@@ -2,11 +2,11 @@ let tree;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.fileName = "./frames/line-006/botany";
-    p.maxFrames = 250;
+    p.fileName = "./frames/line-009/botany";
+    p.maxFrames = 150;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         if (!exporting)  {
@@ -29,7 +29,7 @@ var sketch = new p5(function(p) {
     p.draw = function() {
         p.background(200);
         // let s = p.map(p.frameCount, 0, 200, 1, 0.9);
-        p.translate(p.width /  2, p.height - 20);
+        p.translate(p.width /  2, p.height - 100);
         p.scale(0.6, 0.6);
         for (let i = 0; i < 2; i++) {
             tree.grow();

@@ -13,3 +13,9 @@ ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -vf
 ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -i palette-004.png -lavfi paletteuse -s 720x720 ./video-renders/evolutionary-botany-line-004.gif
 
 ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -i palette-004.png -lavfi paletteuse -s 540x540 ./video-renders/evolutionary-botany-line-004.gif
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-005/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/line-005-24fps.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-006/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/line-006-24fps.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-007/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/line-007-24fps.mp4
