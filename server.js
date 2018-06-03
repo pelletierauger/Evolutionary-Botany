@@ -1,7 +1,9 @@
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
+var filenameFormatter = require('./filename-formatter.js');
 var url = require('url');
+let JSONs = [];
 
 function handleRequest(req, res) {
     // What did we request?
@@ -61,6 +63,7 @@ io.sockets.on('connection', function(socket) {
     console.log("Client " + socket.id + " is connected.");
 
     socket.on('pullJSONs', function() {
+        console.log("Pushing the JSON files to client " + socket.id + ".");
         io.sockets.emit('pushJSONs', JSONs);
     });
 
@@ -93,20 +96,46 @@ io.sockets.on('connection', function(socket) {
         });
     });
 
-    // socket.on('savePoints', function(data) {
-    //     console.log(data);
-    //     data = JSON.stringify(data);
-    //     var fileName = filenameFormatter(Date());
-    //     fileName = fileName.slice(0, fileName.length - 13);
-    //     fs.writeFile("./JSONs/" + fileName + '.json', data, function(err) {
-    //         if (err) {
-    //             return console.error(err);
-    //         } else {
-    //             console.log("./JSONs/" + fileName + '.json written successfully.');
-    //         }
-    //     });
-    // });
+    socket.on('saveJSON', function(input) {
+        console.log(input);
+        let data = JSON.stringify(input.data);
+        var fileName = filenameFormatter(Date());
+        fileName = fileName.slice(0, fileName.length - 13);
+        fs.writeFile(input.path + fileName + '.json', data, function(err) {
+            if (err) {
+                return console.error(err);
+            } else {
+                console.log(input.path + fileName + '.json written successfully.');
+            }
+        });
+    });
 });
+
+function loadJSONs() {
+    try {
+        var files = fs.readdirSync("./objects");
+    } catch (e) {
+        return;
+    }
+    if (files.length > 0)
+        for (var i = 0; i < files.length; i++) {
+            var filePath = "./objects/" + files[i];
+
+            var fileType = filePath.slice(filePath.length - 5, filePath.length);
+            if (fileType == ".json" ||  fileType == ".JSON") {
+                var fileName = "" + files[i];
+                fileName = fileName.slice(0, fileName.length - 5);
+                // var obj = new graphJSON(filePath, fileName);
+                console.log(fileName + " loaded successfully.");
+                JSONs.push({
+                    name: fileName,
+                    data: JSON.parse(fs.readFileSync(filePath))
+                })
+            }
+        }
+}
+
+loadJSONs();
 
 function decodeBase64Image(dataString) {
     var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/),
