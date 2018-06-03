@@ -12,8 +12,8 @@ var sketch = new p5(function(p) {
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
         p.background(200);
-        p.stroke(0, 150);
-        p.strokeWeight(2);
+        p.stroke(0, 255);
+        p.strokeWeight(3);
         if (!p.looping) {
             p.noLoop();
         }
