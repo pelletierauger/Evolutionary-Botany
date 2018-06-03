@@ -1,0 +1,12 @@
+{
+    "description": "Peach orange, dull blue.",
+    "redOsc": 3,
+    "redMin": 238,
+    "redMax": 100,
+    "greenOsc": 4,
+    "greenMin": 96,
+    "greenMax": 113,
+    "blueOsc": 3,
+    "blueMin": 199,
+    "blueMax": 83
+}

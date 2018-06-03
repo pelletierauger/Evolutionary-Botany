@@ -1,0 +1,12 @@
+{
+    "description": "Grey, bright yellow, orange.",
+    "redOsc": 8,
+    "redMin": 5,
+    "redMax": 196,
+    "greenOsc": 4,
+    "greenMin": 128,
+    "greenMax": 53,
+    "blueOsc": 8,
+    "blueMin": 15,
+    "blueMax": 165
+}

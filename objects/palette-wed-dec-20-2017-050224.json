@@ -1,0 +1,12 @@
+{
+    "description": "Murky colors but interesting pattern highlighting for bigFractal.",
+    "redOsc": 5,
+    "redMin": 25,
+    "redMax": 132,
+    "greenOsc": 8,
+    "greenMin": 53,
+    "greenMax": 41,
+    "blueOsc": 1,
+    "blueMin": 31,
+    "blueMax": 222
+}

@@ -1,0 +1,12 @@
+{
+    "description": "Bright red, ocre brown, and yellowish green.",
+    "redOsc": 8,
+    "redMin": 23,
+    "redMax": 227,
+    "greenOsc": 9,
+    "greenMin": 164,
+    "greenMax": 21,
+    "blueOsc": 6,
+    "blueMin": 24,
+    "blueMax": 3
+}

@@ -1,0 +1,12 @@
+{
+    "description": "Bright and dull greens. Interesting interaction with bigFractal.",
+    "redOsc": 7,
+    "redMin": 21,
+    "redMax": 95,
+    "greenOsc": 2,
+    "greenMin": 244,
+    "greenMax": 90,
+    "blueOsc": 9,
+    "blueMin": 15,
+    "blueMax": 162
+}

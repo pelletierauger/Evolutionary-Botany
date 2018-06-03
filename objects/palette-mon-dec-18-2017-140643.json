@@ -1,0 +1,12 @@
+{
+    "description": "Bright purple, dull green mixed with ocre yellow. Forest green farther away.",
+    "redOsc": 9,
+    "redMin": 6,
+    "redMax": 113,
+    "greenOsc": 8,
+    "greenMin": 131,
+    "greenMax": 90,
+    "blueOsc": 4,
+    "blueMin": 42,
+    "blueMax": 240
+}

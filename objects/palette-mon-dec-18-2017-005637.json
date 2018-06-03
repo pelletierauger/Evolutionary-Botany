@@ -1,0 +1,12 @@
+{
+    "description": "Bright lime green, purple, dull orange, reddish brown.",
+    "redOsc": 8,
+    "redMin": 7,
+    "redMax": 194,
+    "greenOsc": 1,
+    "greenMin": 253,
+    "greenMax": 53,
+    "blueOsc": 9,
+    "blueMin": 63,
+    "blueMax": 188
+}

@@ -1,0 +1,11 @@
+{
+    "redOsc": 3,
+    "redMin": 26,
+    "redMax": 205,
+    "greenOsc": 4,
+    "greenMin": 116,
+    "greenMax": 9,
+    "blueOsc": 4,
+    "blueMin": 60,
+    "blueMax": 222
+}

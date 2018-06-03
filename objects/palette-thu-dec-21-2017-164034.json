@@ -1,0 +1,12 @@
+{
+    "description": "Bright yellow, dark pink, pale pink, ocre brown.",
+    "redOsc": 9,
+    "redMin": 234,
+    "redMax": 207,
+    "greenOsc": 2,
+    "greenMin": 224,
+    "greenMax": 24,
+    "blueOsc": 7,
+    "blueMin": 11,
+    "blueMax": 221
+}

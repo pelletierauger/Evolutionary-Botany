@@ -1,0 +1,12 @@
+{
+    "description": "Reddish brown, ocre brown, pink, beige, and dull greenish yellow.",
+    "redOsc": 2,
+    "redMin": 237,
+    "redMax": 135,
+    "greenOsc": 3,
+    "greenMin": 162,
+    "greenMax": 45,
+    "blueOsc": 2,
+    "blueMin": 38,
+    "blueMax": 136
+}

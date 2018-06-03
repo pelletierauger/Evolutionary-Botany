@@ -1,0 +1,12 @@
+{
+    "description": "Red, dusty pink, bright yellow, and pale grey.",
+    "redOsc": 9,
+    "redMin": 3,
+    "redMax": 235,
+    "greenOsc": 4,
+    "greenMin": 229,
+    "greenMax": 28,
+    "blueOsc": 8,
+    "blueMin": 39,
+    "blueMax": 230
+}

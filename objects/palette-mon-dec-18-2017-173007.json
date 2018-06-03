@@ -1,0 +1,12 @@
+{
+    "description": "Salmon, dull pink, yellow.",
+    "redOsc": 3,
+    "redMin": 247,
+    "redMax": 151,
+    "greenOsc": 4,
+    "greenMin": 224,
+    "greenMax": 51,
+    "blueOsc": 6,
+    "blueMin": 67,
+    "blueMax": 208
+}

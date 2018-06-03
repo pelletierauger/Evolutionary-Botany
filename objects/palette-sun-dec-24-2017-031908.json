@@ -1,0 +1,12 @@
+{
+    "description": "Rapidly oscillating version of red-blue-pink.",
+    "redOsc": 0.474609375,
+    "redMin": 26,
+    "redMax": 205,
+    "greenOsc": 0.6328125,
+    "greenMin": 116,
+    "greenMax": 9,
+    "blueOsc": 0.6328125,
+    "blueMin": 60,
+    "blueMax": 222
+}
