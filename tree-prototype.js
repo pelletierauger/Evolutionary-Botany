@@ -11,7 +11,7 @@ Tree.prototype.grow = function() {
 };
 
 Tree.prototype.gatherShapes = function() {
-
+    this.root.gatherShapes(this.pos.x, this.pos.y);
 };
 
 Tree.prototype.draw = function() {
@@ -99,12 +99,24 @@ Segment.prototype.draw = function(x, y) {
     var newX = x + Math.cos(a) * l;
     var newY = y - Math.sin(a) * l;
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
-    sketch.line(x, y, newX, newY);
+    // sketch.line(x, y, newX, newY);
+    scene.registerLine(x, y, newX, newY);
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].draw(newX, newY);
     }
 };
 
-Segment.prototype.gatherShapes = function() {
-
+Segment.prototype.gatherShapes = function(x, y) {
+    let a = this.angle;
+    let l = this.length;
+    var newX = x + Math.cos(a) * l;
+    var newY = y - Math.sin(a) * l;
+    // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
+    // sketch.line(x, y, newX, newY);
+    // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
+    scene.registerLine(x, y, newX, newY);
+    // scene.registerLine(0, 1, 2, 3);
+    for (let i = 0; i < this.children.length; i++) {
+        this.children[i].gatherShapes(newX, newY);
+    }
 };
