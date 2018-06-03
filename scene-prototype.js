@@ -1,10 +1,86 @@
 let Scene = function() {
-    this.frameCount = 1;
+    this.fileName = "./frames/line-010/botany";
+    this.maxFrames = 2500;
+    this.frameCount = 0;
     this.shapes = [];
+    this.shapesPerFrame = 5000;
+    this.framePrinted = true;
 };
 
 Scene.prototype.addShape = function(s) {
     this.shapes.push(s);
 };
 
-let scene = new Scene();
+Scene.prototype.registerLine = function(x1, y1, x2, y2) {
+    this.shapes.push({
+        type: "line",
+        x1: x1,
+        y1: y1,
+        x2: x2,
+        y2: y2
+    });
+    // console.log("SCENE : x: " + x1 + ", y: " + y1 + ", x2: " + x2 + " y2: " + y2);
+};
+
+Scene.prototype.update = function() {
+    if (this.framePrinted) {
+        this.frameCount++;
+        sketch.background(200);
+        // sketch.translate(sketch.width / 2, sketch.height - 100);
+        // sketch.scale(0.6, 0.6);
+        tree.grow();
+        tree.grow();
+        tree.gatherShapes();
+        this.framePrinted = false;
+    }
+    if (!this.framePrinted) {
+        sketch.translate(sketch.width / 2, sketch.height - 100);
+        sketch.scale(0.6, 0.6);
+        if (this.shapes.length <= this.shapesPerFrame) {
+            for (let i = 0; i < this.shapes.length; i++) {
+                this.printObject(this.shapes[i]);
+            }
+            this.shapes = [];
+        } else {
+            for (let i = 0; i < this.shapesPerFrame; i++) {
+                this.printObject(this.shapes[this.shapes.length - 1]);
+                this.shapes.pop();
+            }
+        }
+    }
+    if (this.shapes.length == 0) {
+        this.framePrinted = true;
+        if (exporting && this.frameCount < this.maxFrames) {
+            frameExport(sketch);
+        }
+    }
+};
+
+Scene.prototype.print = function() {
+    if (this.shapes.length <= this.shapesPerFrame) {
+        sketch.background(200);
+        sketch.translate(sketch.width / 2, sketch.height - 100);
+        sketch.scale(0.6, 0.6);
+        tree.grow();
+        tree.gatherShapes();
+        for (let i = 0; i < this.shapes.length; i++) {
+            this.printObject(this.shapes[i]);
+        }
+        this.shapes = [];
+        this.frameCount++;
+    } else {
+        // if ()
+    }
+};
+
+Scene.prototype.printObject = function(obj) {
+    if (obj.type == "line") {
+        sketch.line(obj.x1, obj.y1, obj.x2, obj.y2);
+    }
+};
+
+let scene = new Scene({
+    name: "demo",
+    type: "line",
+    frameRate: 24
+});
