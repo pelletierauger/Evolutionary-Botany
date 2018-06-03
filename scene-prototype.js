@@ -3,8 +3,9 @@ let Scene = function() {
     this.maxFrames = 2500;
     this.frameCount = 0;
     this.shapes = [];
-    this.shapesPerFrame = 5000;
+    this.shapesPerFrame = 10000;
     this.framePrinted = true;
+    this.trees = [];
 };
 
 Scene.prototype.addShape = function(s) {
@@ -19,22 +20,21 @@ Scene.prototype.registerLine = function(x1, y1, x2, y2) {
         x2: x2,
         y2: y2
     });
-    // console.log("SCENE : x: " + x1 + ", y: " + y1 + ", x2: " + x2 + " y2: " + y2);
 };
 
 Scene.prototype.update = function() {
     if (this.framePrinted) {
         this.frameCount++;
         sketch.background(200);
-        // sketch.translate(sketch.width / 2, sketch.height - 100);
-        // sketch.scale(0.6, 0.6);
-        tree.grow();
-        tree.grow();
-        tree.gatherShapes();
+        for (let i = 0; i <  this.trees.length; i++) {
+            this.trees[i].grow();
+            this.trees[i].grow();
+            this.trees[i].gatherShapes();
+        }
         this.framePrinted = false;
     }
     if (!this.framePrinted) {
-        sketch.translate(sketch.width / 2, sketch.height - 100);
+        sketch.translate(sketch.width / 2, sketch.height - 50);
         sketch.scale(0.6, 0.6);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {

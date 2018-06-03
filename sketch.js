@@ -1,5 +1,5 @@
-let tree;
 let JSONs;
+let tree;
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -10,21 +10,20 @@ var sketch = new p5(function(p) {
         p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
-        // if (!exporting)  {
         p.frameRate(30);
-        // } else {
-        //     p.frameRate(1);
-        // }
         p.background(200);
-        // p.fill(255, 50);
         p.stroke(0, 150);
         p.strokeWeight(2);
-        // p.noStroke();
         if (!p.looping) {
             p.noLoop();
         }
         let dna = new DNA();
-        tree = new Tree(0, 0, dna);
+        tree = new Tree(-p.width / 3, -p.height / 2 - 200, dna);
+        tree = new Tree(p.width / 3, -p.height / 2 - 200, dna);
+        tree = new Tree(-p.width / 3, p.height / 2 - 350, dna);
+        tree = new Tree(p.width / 3, p.height / 2 - 350, dna);
+        // tree = new Tree(-400, 0, dna);
+        // tree2 = new Tree(400, 0, dna);
         p.socket.on('pushJSONs', function(data) {
             JSONs = data;
         });
