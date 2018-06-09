@@ -31,10 +31,16 @@ let sequences = [{
         end: 98,
         copies: 1
     },
+    // {
+    //     path: "./frames/branching-009/botany-",
+    //     start: 1,
+    //     end: 93,
+    //     copies: 1
+    // },
     {
-        path: "./frames/branching-009/botany-",
+        path: "./frames/branching-012/botany-",
         start: 1,
-        end: 93,
+        end: 205,
         copies: 1
     },
     {
