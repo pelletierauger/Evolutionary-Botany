@@ -105,14 +105,14 @@ Segment.prototype.grow = function() {
         } else if (this.lastBranching == "right") {
             this.angleDelta -= (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "forward") {
-            this.angleDelta -= (Math.cos(freq) * 0.0001) * this.coin;
+            this.angleDelta -= (Math.cos(freq) * 0.0005) * this.coin;
         }
     }
     this.angleDelta += (Math.random() > 0.5) ? -0.0005 : 0.0005;
     this.angle = this.parent.angle + this.angleDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
-            this.length += this.dna.branchGrowth * 1;
+            this.length += this.dna.branchGrowth * 1.2;
         } else {
             this.length += this.dna.branchGrowth;
         }
