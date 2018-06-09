@@ -27,3 +27,7 @@ ffmpeg -f image2 -framerate 24 -i ./frames/line-010/botany-%05d.png -c:v libx264
 ffmpeg -f concat -safe 0 -r 30 -i branchings.txt -c:v libx264 -s 2560x1440 -pix_fmt yuv420p ./video-renders/branchings-montage.mp4
 
 ffmpeg -f concat -safe 0 -r 24 -i branchings.txt -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/branchings-montage.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/branching-012/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/branching-012.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/branching-015/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/branching-015.mp4
