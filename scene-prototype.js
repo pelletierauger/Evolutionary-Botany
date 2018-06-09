@@ -1,6 +1,6 @@
 let Scene = function() {
-    this.fileName = "./frames/branching-003/botany";
-    this.maxFrames = 500;
+    this.fileName = "./frames/branching-005/botany";
+    this.maxFrames = 250;
     this.frameCount = 0;
     this.shapes = [];
     this.shapesPerFrame = 10000;
