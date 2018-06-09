@@ -43,6 +43,12 @@ let sequences = [{
         end: 122,
         copies: 1
     },
+    {
+        path: "./frames/branching-011/botany-",
+        start: 1,
+        end: 137,
+        copies: 1
+    }
 ];
 
 for (s of sequences) {
