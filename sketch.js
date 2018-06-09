@@ -7,7 +7,7 @@ var sketch = new p5(function(p) {
     p.maxFrames = 150;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
@@ -18,10 +18,11 @@ var sketch = new p5(function(p) {
             p.noLoop();
         }
         let dna = new DNA();
-        tree = new Tree(-p.width / 3, -p.height / 2 - 200, dna);
-        tree = new Tree(p.width / 3, -p.height / 2 - 200, dna);
-        tree = new Tree(-p.width / 3, p.height / 2 - 350, dna);
-        tree = new Tree(p.width / 3, p.height / 2 - 350, dna);
+        tree = new Tree(0, 0, dna);
+        // tree = new Tree(0, -p.height / 2 - 100, dna);
+        // tree = new Tree(p.width / 3, -pr.height / 2 - 200, dna);
+        // tree = new Tree(-p.width / 2.5, p.height / 2 - 350, dna);
+        // tree = new Tree(p.width / 2.5, p.height / 2 - 350, dna);
         // tree = new Tree(-400, 0, dna);
         // tree2 = new Tree(400, 0, dna);
         p.socket.on('pushJSONs', function(data) {
