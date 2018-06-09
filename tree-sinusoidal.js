@@ -99,13 +99,13 @@ Segment.prototype.grow = function() {
     if (Math.abs(this.angleDelta) < this.dna.branchingAngle * 0.1) {
         let freq = 1 + this.SegmentPosition * 0.5;
         // freq = (freq * -this.segmentID);
-        // freq = Math.pow(freq, -3);
+        freq = Math.pow(freq, -3);
         if (this.lastBranching == "left") {
             this.angleDelta += (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "right") {
             this.angleDelta -= (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "forward") {
-            this.angleDelta -= (Math.cos(freq) * 0.0005) * this.coin;
+            // this.angleDelta -= (Math.cos(freq) * 0.0005) * this.coin;
         }
     }
     this.angleDelta += (Math.random() > 0.5) ? -0.0005 : 0.0005;
