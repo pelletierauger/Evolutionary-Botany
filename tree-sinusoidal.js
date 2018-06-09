@@ -96,7 +96,7 @@ Segment.prototype.grow = function() {
             }
         }
     }
-    if (Math.abs(this.angleDelta) < this.dna.branchingAngle * 0.1) {
+    if (Math.abs(this.angleDelta) < this.dna.branchingAngle * 0.5) {
         let freq = 1 + this.SegmentPosition * 0.5;
         // freq = (freq * -this.segmentID);
         freq = Math.pow(freq, -3);
