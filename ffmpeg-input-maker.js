@@ -50,6 +50,12 @@ let sequences = [{
         copies: 1
     },
     {
+        path: "./frames/branching-016/botany-",
+        start: 1,
+        end: 143,
+        copies: 1
+    },
+    {
         path: "./frames/branching-014/botany-",
         start: 1,
         end: 110,
