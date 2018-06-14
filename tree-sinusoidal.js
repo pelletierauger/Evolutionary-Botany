@@ -39,16 +39,13 @@ let Segment = function(parent, direction) {
         this.energy = this.dna.initialEnergy;
         this.SegmentPosition = 0;
         this.lastBranching = "forward";
-
         this.coin = (Math.random() < 0.5) ? -1 : 1;
-        // this.angle = this.parent.angle;
     } else {
         this.energy = this.parent.energy * this.dna.energyLoss;
 
         if (this.isBranch) {
             this.SegmentPosition = 0;
             this.lastBranching = direction;
-
             this.coin = (Math.random() < 0.5) ? -1 : 1;
         } else {
             this.SegmentPosition = this.parent.SegmentPosition + 1;
@@ -59,34 +56,18 @@ let Segment = function(parent, direction) {
             } else {
                 this.coin = this.parent.coin;
             }
-
         }
-
     }
     this.angle = this.parent.angle;
     this.angleDelta = 0;
-    // if (direction == "left") {
-    //     this.angle = this.parent.angle + this.dna.branchingAngle;
-    //     this.angle = this.parent.angle;
-
-    //     // this.angle = this.parent.angle + (this.dna.branchingAngle * sketch.map(this.segmentID, 10, 30, 5, 0.1));
-    // } else if (direction == "forward") {
-    //     this.angle = this.parent.angle;
-    // } else if (direction == "right") {
-    //     this.angle = this.parent.angle - this.dna.branchingAngle;
-    //     this.angle = this.parent.angle;
-
-    //     // this.angle = this.parent.angle - (this.dna.branchingAngle * sketch.map(this.segmentID, 10, 30, 5, 0.1));
-    // }
-
     this.children = [];
     this.length = 0;
+    this.leaf = null;
 };
 
 Segment.prototype.grow = function() {
     if (this.isBranch) {
         if (Math.abs(this.angleDelta) < this.dna.branchingAngle) {
-            // console.log("this never happens");
             if (this.branchedDirection == "left") {
                 this.angleDelta += 0.005;
                 // this.angleDelta += Math.cos(this.SegmentPosition);
@@ -121,6 +102,9 @@ Segment.prototype.grow = function() {
     }
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].grow();
+        if (this.children[i].leaf) {
+            this.children[i].leaf.grow();
+        }
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedLeft) {
@@ -138,7 +122,11 @@ Segment.prototype.grow = function() {
             this.branch("right");
         }
     }
-
+    if (Math.random() <= this.dna.leafingProbability) {
+        if (!this.leaf && !this.branchedForward) {
+            this.makeLeaf();
+        }
+    }
 };
 
 Segment.prototype.branch = function(direction) {
@@ -148,6 +136,9 @@ Segment.prototype.branch = function(direction) {
         this.branchedLeft = true;
     } else if (direction == "forward") {
         this.branchedForward = true;
+        if (this.leaf) {
+            this.pushLeaf(this.children[this.children.length - 1]);
+        }
     } else if (direction == "right") {
         this.branchedRight = true;
     } else {
@@ -176,9 +167,24 @@ Segment.prototype.gatherShapes = function(x, y) {
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
     // sketch.line(x, y, newX, newY);
     // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
-    scene.registerLine(x, y, newX, newY);
+    scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 0, a: 255 });
     // scene.registerLine(0, 1, 2, 3);
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].gatherShapes(newX, newY);
+        if (this.children[i].leaf) {
+            this.children[i].leaf.gatherShapes(newX, newY);
+        }
+    }
+};
+
+Segment.prototype.makeLeaf = function() {
+    // A tree segment can only have one leaf, but a leaf can have many leaflets.
+    this.leaf = new Leaf(this);
+};
+
+Segment.prototype.pushLeaf = function(destination) {
+    if (this.leaf) {
+        destination.leaf = this.leaf;
+        this.leaf = null;
     }
 };

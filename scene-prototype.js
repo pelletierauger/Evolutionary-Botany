@@ -12,13 +12,22 @@ Scene.prototype.addShape = function(s) {
     this.shapes.push(s);
 };
 
-Scene.prototype.registerLine = function(x1, y1, x2, y2) {
+Scene.prototype.registerLine = function(x1, y1, x2, y2, col) {
     this.shapes.push({
         type: "line",
         x1: x1,
         y1: y1,
         x2: x2,
-        y2: y2
+        y2: y2,
+        col: col
+    });
+};
+
+Scene.prototype.registerEllipse = function(x, y) {
+    this.shapes.push({
+        type: "ellipse",
+        x: x,
+        y: y
     });
 };
 
@@ -75,7 +84,13 @@ Scene.prototype.print = function() {
 
 Scene.prototype.printObject = function(obj) {
     if (obj.type == "line") {
+        sketch.stroke(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
         sketch.line(obj.x1, obj.y1, obj.x2, obj.y2);
+    }
+    if (obj.type == "ellipse") {
+        sketch.noStroke();
+        sketch.fill(0, 50);
+        sketch.ellipse(obj.x, obj.y, 10);
     }
 };
 
