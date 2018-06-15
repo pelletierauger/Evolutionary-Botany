@@ -13,6 +13,7 @@ let Leaf = function(parent) {
 
 Leaf.prototype.grow = function() {
     // This should 
+    this.angle = this.parent.angle;
     this.root.grow();
 };
 
@@ -27,35 +28,47 @@ let PetioleSegment = function(parent, direction) {
     this.parent = parent;
     this.dna = this.parent.dna;
     this.isLeafRoot = this.parent instanceof Leaf;
-    this.segmentID = parent.segmentID + 1;
-    // this.isPetioluleRoot = this.parent.petioluleIndex == 0;
     this.isBranch = (direction == "left" || direction == "right");
+    this.segmentID = parent.segmentID + 1;
     this.branchedDirection = direction;
     this.foliole = null;
     this.length = 0;
     if (this.isLeafRoot) {
+        this.knots = 0;
         this.energy = this.dna.initialEnergy;
-        // console.log("OH MY, " + this.energy);
-        // this.isPetioluleRoot = 0;
         this.petioluleIndex = 0;
         this.petioleIndex = 0;
         this.lastBranching = "forward";
         this.coin = (Math.random() < 0.5) ? -1 : 1;
     } else {
+        // If the petiole segment is not at the root of the leaf...
+
         this.energy = this.parent.energy * this.dna.energyLoss;
-        // console.log("Whoa there, " + this.energy);
 
         // If this petiole segment was a branching segment, then...
         if (this.isBranch) {
+            this.knots = 0;
             this.lastBranching = direction;
-            this.coin = (Math.random() < 0.5) ? -1 : 1;
             this.petioluleIndex = 0;
             this.petioleIndex = this.parent.petioleIndex + 1;
         } else {
             // Here, direction is "forward"
+            // This conditionals should only be true when a terminal segment must be made.
+            // But right now...
+            if (this.parent.knots == this.parent.maxKnots && this.dna.petioleTerminalLeaflet) {
+                // A terminal segment is like a branch, but forward... so...
+                this.petioluleIndex = 0;
+                this.petioleIndex = this.parent.petioleIndex + 1;
+            } else {
+                this.petioluleIndex = this.parent.petioluleIndex + 1;
+                this.petioleIndex = this.parent.petioleIndex;
+            }
+            // if (this.parent.children.length > 1) {
+            // this.knots = this.parent.knots + 1;
+            // } else {
+            this.knots = this.parent.knots;
+            // }
             this.lastBranching = parent.lastBranching;
-            this.petioluleIndex = this.parent.petioluleIndex + 1;
-            this.petioleIndex = this.parent.petioleIndex;
         }
         if (this.parent.children.length == 1) {
             this.coin = (Math.random() < 0.5) ? -1 : 1;
@@ -74,10 +87,36 @@ let PetioleSegment = function(parent, direction) {
     this.angle = this.parent.angle;
     this.angleDelta = 0;
     this.children = [];
+
+    switch (this.petioleIndex) {
+        case 0:
+            this.maxKnots = this.dna.maxKnotsLevel0;
+            break;
+        case 1:
+            this.maxKnots = this.dna.maxKnotsLevel1;
+            break;
+        case 2:
+            this.maxKnots = this.dna.maxKnotsLevel2;
+            break;
+        case 3:
+            this.maxKnots = this.dna.maxKnotsLevel3;
+            break;
+        case 4:
+            this.maxKnots = this.dna.maxKnotsLevel4;
+            break;
+        case 5:
+            this.maxKnots = this.dna.maxKnotsLevel5;
+            break;
+    }
+
+    if (this.petioleIndex == this.dna.petioluleDepth) {
+        this.knots = Infinity;
+    }
 };
 
 PetioleSegment.prototype.grow = function() {
 
+    // This allows the branches to reach their desired angle.
     if (this.isBranch) {
         if (Math.abs(this.angleDelta) < this.dna.petioleMaxAngleDelta) {
             if (this.lastBranching == "left") {
@@ -89,46 +128,70 @@ PetioleSegment.prototype.grow = function() {
     }
     this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
     this.angle = this.parent.angle + this.angleDelta;
+    //------
 
+
+    // Growing the folioles
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].grow();
         if (this.children[i].foliole) {
             this.children[i].foliole.grow();
         }
     }
+
+    // Actually growing the length of the segment
     if (this.energy > 0) {
-        // console.log("GROWTH" + this.energy);
         if (this.length < this.dna.petioleMaxSegmentLength) {
             this.length += this.dna.petioleSegmentGrowth;
             this.energy -= this.dna.petioleSegmentGrowthCost;
         }
     }
 
-    if (this.petioleIndex <= this.dna.petioluleDepth) {
-        if (Math.random() <= this.dna.petioleBranchingProbability) {
+    // Checking to see if any branching needs to be done.
+
+    if (this.knots < this.maxKnots) {
+        if (this.petioleIndex < this.dna.petioluleDepth) {
+            // if (Math.random() <= this.dna.petioleBranchingProbability) {
             if (!this.branchedLeft) {
+                if (this.children.length == 0) {
+                    this.knots++;
+                }
                 this.branch("left");
             }
-        }
-        if (Math.random() <= this.dna.petioleBranchingProbability) {
+            // }
+            // if (Math.random() <= this.dna.petioleBranchingProbability) {
             if (!this.branchedRight) {
+                if (this.children.length == 0) {
+                    this.knots++;
+                }
                 this.branch("right");
             }
+            // }
         }
     }
 
-    if (this.petioluleIndex <= this.dna.petioleSegmentsToLeaflet) {
-        if (Math.random() <= this.dna.petioleBranchingProbability) {
-            if (!this.branchedForward) {
-                this.branch("forward");
+    // Can a segment branch forward ???
+    // if (this.knots < this.maxKnots) ... it always can.
+    // but if (this.knots == this.maxKnots)... it can if this. 
+
+    if (this.knots <= this.maxKnots ||
+        (this.knots >= this.maxKnots && this.dna.petioleTerminalLeaflet &&
+            this.petioluleIndex < this.dna.petioleSegmentsToFoliole)) {
+        if (this.petioleIndex <= this.dna.petioluleDepth) {
+            if (Math.random() <= this.dna.petioleBranchingProbability) {
+                if (!this.branchedForward) {
+                    this.branch("forward");
+                }
             }
         }
     }
 
-    if (Math.random() <= this.dna.folioleProbability) {
+    if (this.petioleIndex == this.dna.petioluleDepth) {
+        // if (Math.random() <= this.dna.folioleProbability) {
         if (!this.foliole && !this.branchedForward) {
             this.makeFoliole();
         }
+        // }
     }
 };
 

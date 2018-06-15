@@ -7,7 +7,7 @@ var sketch = new p5(function(p) {
     p.maxFrames = 150;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowHeight);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
