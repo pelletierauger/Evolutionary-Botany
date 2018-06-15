@@ -53,22 +53,21 @@ let PetioleSegment = function(parent, direction) {
             this.petioleIndex = this.parent.petioleIndex + 1;
         } else {
             // Here, direction is "forward"
-            // This conditionals should only be true when a terminal segment must be made.
-            // But right now...
-            if (this.parent.knots == this.parent.maxKnots && this.dna.petioleTerminalLeaflet) {
-                // A terminal segment is like a branch, but forward... so...
+            this.lastBranching = parent.lastBranching;
+
+            // The conditional below should only be true when a segment is terminal.
+            if (this.parent.knots == this.parent.maxKnots && this.dna.petioleTerminalFoliole) {
+                // A terminal segment is like a branch, but forward, so indexes are adjusted.
+                // A terminal segment also cannot branch anymore.
+                // This is not a terminal segment !!!
                 this.petioluleIndex = 0;
                 this.petioleIndex = this.parent.petioleIndex + 1;
+                this.knots = 0;
             } else {
                 this.petioluleIndex = this.parent.petioluleIndex + 1;
                 this.petioleIndex = this.parent.petioleIndex;
+                this.knots = this.parent.knots;
             }
-            // if (this.parent.children.length > 1) {
-            // this.knots = this.parent.knots + 1;
-            // } else {
-            this.knots = this.parent.knots;
-            // }
-            this.lastBranching = parent.lastBranching;
         }
         if (this.parent.children.length == 1) {
             this.coin = (Math.random() < 0.5) ? -1 : 1;
@@ -108,15 +107,13 @@ let PetioleSegment = function(parent, direction) {
             this.maxKnots = this.dna.maxKnotsLevel5;
             break;
     }
-
-    if (this.petioleIndex == this.dna.petioluleDepth) {
-        this.knots = Infinity;
-    }
 };
 
 PetioleSegment.prototype.grow = function() {
 
+    //------------------------------------------------------------------------------
     // This allows the branches to reach their desired angle.
+
     if (this.isBranch) {
         if (Math.abs(this.angleDelta) < this.dna.petioleMaxAngleDelta) {
             if (this.lastBranching == "left") {
@@ -128,10 +125,12 @@ PetioleSegment.prototype.grow = function() {
     }
     this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
     this.angle = this.parent.angle + this.angleDelta;
-    //------
+    //------------------------------------------------------------------------------
 
-
+    //------------------------------------------------------------------------------
     // Growing the folioles
+    //------------------------------------------------------------------------------
+
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].grow();
         if (this.children[i].foliole) {
@@ -139,7 +138,10 @@ PetioleSegment.prototype.grow = function() {
         }
     }
 
+    //------------------------------------------------------------------------------
     // Actually growing the length of the segment
+    //------------------------------------------------------------------------------
+
     if (this.energy > 0) {
         if (this.length < this.dna.petioleMaxSegmentLength) {
             this.length += this.dna.petioleSegmentGrowth;
@@ -147,7 +149,9 @@ PetioleSegment.prototype.grow = function() {
         }
     }
 
+    //------------------------------------------------------------------------------
     // Checking to see if any branching needs to be done.
+    //------------------------------------------------------------------------------
 
     if (this.knots < this.maxKnots) {
         if (this.petioleIndex < this.dna.petioluleDepth) {
@@ -170,20 +174,26 @@ PetioleSegment.prototype.grow = function() {
         }
     }
 
+    //------------------------------------------------------------------------------
     // Can a segment branch forward ???
-    // if (this.knots < this.maxKnots) ... it always can.
+    // if (this.knots < this.maxKnots) ... it can IF... terminals is true...
     // but if (this.knots == this.maxKnots)... it can if this. 
+    //------------------------------------------------------------------------------
 
-    if (this.knots <= this.maxKnots ||
-        (this.knots >= this.maxKnots && this.dna.petioleTerminalLeaflet &&
+    if ((this.petioleIndex < this.dna.petioluleDepth && this.knots < this.maxKnots) ||
+        (this.petioleIndex < this.dna.petioluleDepth && this.dna.petioleTerminalFoliole) ||
+        (this.petioleIndex == this.dna.petioluleDepth &&
             this.petioluleIndex < this.dna.petioleSegmentsToFoliole)) {
-        if (this.petioleIndex <= this.dna.petioluleDepth) {
-            if (Math.random() <= this.dna.petioleBranchingProbability) {
-                if (!this.branchedForward) {
-                    this.branch("forward");
-                }
+        // if ((this.knots < this.maxKnots) ||
+        // (this.knots == this.maxKnots && this.dna.petioleTerminalFoliole &&
+        // this.petioluleIndex < this.dna.petioleSegmentsToFoliole)) {
+
+        if (Math.random() <= this.dna.petioleBranchingProbability) {
+            if (!this.branchedForward) {
+                this.branch("forward");
             }
         }
+        // }
     }
 
     if (this.petioleIndex == this.dna.petioluleDepth) {
@@ -215,7 +225,6 @@ PetioleSegment.prototype.branch = function(direction) {
 
 
 PetioleSegment.prototype.gatherShapes = function(x, y) {
-    // console.log("What up?");
     let a = this.angle;
     let l = this.length;
     var newX = x + Math.cos(a) * l;
@@ -223,13 +232,20 @@ PetioleSegment.prototype.gatherShapes = function(x, y) {
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
     // sketch.line(x, y, newX, newY);
     // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
-    scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 0, a: 55 });
-    // scene.registerLine(0, 1, 2, 3);
+    if (this.petioleIndex == 0) {
+        scene.registerLine(x, y, newX, newY, { r: 205, g: 0, b: 0, a: 55 });
+    } else if (this.petioleIndex == 1) {
+        scene.registerLine(x, y, newX, newY, { r: 0, g: 155, b: 0, a: 55 });
+    } else if (this.petioleIndex == 2) {
+        scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 255, a: 55 });
+    } else if (this.petioleIndex == 3) {
+        scene.registerLine(x, y, newX, newY, { r: 255, g: 0, b: 255, a: 55 });
+    }
+    if (this.foliole) {
+        this.foliole.gatherShapes(newX, newY);
+    }
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].gatherShapes(newX, newY);
-        if (this.children[i].foliole) {
-            this.children[i].foliole.gatherShape(newX, newY);
-        }
     }
 };
 
@@ -240,6 +256,7 @@ PetioleSegment.prototype.makeFoliole = function() {
 PetioleSegment.prototype.pushFoliole = function(destination) {
     if (this.foliole) {
         destination.foliole = this.foliole;
+        destination.foliole.parent = destination;
         this.foliole = null;
     }
 };

@@ -16,9 +16,9 @@ let DNA = function() {
     this.leafingProbability = 0.1;
 
     // Leaf structure
-    this.petioleSegmentGrowth = 2;
+    this.petioleSegmentGrowth = 4;
     this.petioleMaxBranchings = 0.01;
-    this.petioleMaxSegmentLength = 10;
+    this.petioleMaxSegmentLength = 40;
     this.petioleSegmentsToFoliole = 4;
     this.petioleSegmentGrowthCost = 0.01;
     this.petioleBranchingCost = 0.01;
@@ -31,12 +31,12 @@ let DNA = function() {
     this.petioleBranchingOffsetLeft = 0;
     this.petioleBranchingOffsetRight = 0;
     this.petioluleDepth = 3;
-    this.petioleTerminalLeaflet = true;
+    this.petioleTerminalFoliole = false;
     this.petioleMaxLeafletAmount = 10;
 
     this.maxKnotsLevel0 = 1;
-    this.maxKnotsLevel1 = 7;
-    this.maxKnotsLevel2 = 2;
+    this.maxKnotsLevel1 = 2;
+    this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;
     this.maxKnotsLevel4 = 2;
     this.maxKnotsLevel5 = 2;
