@@ -3,17 +3,17 @@ let tree;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.fileName = "./frames/line-009/botany";
-    p.maxFrames = 150;
+    p.fileName = "./frames/foliage-002/botany";
+    p.maxFrames = 450;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowHeight);
+        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
         p.background(200);
         p.stroke(0, 255);
-        p.strokeWeight(3);
+        p.strokeWeight(2);
         if (!p.looping) {
             p.noLoop();
         }

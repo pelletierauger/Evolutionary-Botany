@@ -107,6 +107,27 @@ let PetioleSegment = function(parent, direction) {
             this.maxKnots = this.dna.maxKnotsLevel5;
             break;
     }
+
+    switch (this.petioleIndex) {
+        case 0:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel0;
+            break;
+        case 1:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel1;
+            break;
+        case 2:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel2;
+            break;
+        case 3:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel3;
+            break;
+        case 4:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel4;
+            break;
+        case 5:
+            this.maxLength = this.dna.petioleMaxSegmentLengthLevel5;
+            break;
+    }
 };
 
 PetioleSegment.prototype.grow = function() {
@@ -123,7 +144,7 @@ PetioleSegment.prototype.grow = function() {
             }
         }
     }
-    this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
+    this.angleDelta += (Math.random() > 0.5) ? -0.015 : 0.015;
     this.angle = this.parent.angle + this.angleDelta;
     //------------------------------------------------------------------------------
 
@@ -143,7 +164,7 @@ PetioleSegment.prototype.grow = function() {
     //------------------------------------------------------------------------------
 
     if (this.energy > 0) {
-        if (this.length < this.dna.petioleMaxSegmentLength) {
+        if (this.length < this.maxLength) {
             this.length += this.dna.petioleSegmentGrowth;
             this.energy -= this.dna.petioleSegmentGrowthCost;
         }
@@ -232,15 +253,16 @@ PetioleSegment.prototype.gatherShapes = function(x, y) {
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
     // sketch.line(x, y, newX, newY);
     // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
-    if (this.petioleIndex == 0) {
-        scene.registerLine(x, y, newX, newY, { r: 205, g: 0, b: 0, a: 55 });
-    } else if (this.petioleIndex == 1) {
-        scene.registerLine(x, y, newX, newY, { r: 0, g: 155, b: 0, a: 55 });
-    } else if (this.petioleIndex == 2) {
-        scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 255, a: 55 });
-    } else if (this.petioleIndex == 3) {
-        scene.registerLine(x, y, newX, newY, { r: 255, g: 0, b: 255, a: 55 });
-    }
+    // if (this.petioleIndex == 0) {
+    //     scene.registerLine(x, y, newX, newY, { r: 205, g: 0, b: 0, a: 55 });
+    // } else if (this.petioleIndex == 1) {
+    //     scene.registerLine(x, y, newX, newY, { r: 0, g: 155, b: 0, a: 55 });
+    // } else if (this.petioleIndex == 2) {
+    //     scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 255, a: 55 });
+    // } else if (this.petioleIndex == 3) {
+    //     scene.registerLine(x, y, newX, newY, { r: 255, g: 0, b: 255, a: 55 });
+    // }
+    scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 0, a: 255 });
     if (this.foliole) {
         this.foliole.gatherShapes(newX, newY);
     }

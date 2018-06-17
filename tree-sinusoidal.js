@@ -93,7 +93,7 @@ Segment.prototype.grow = function() {
     this.angle = this.parent.angle + this.angleDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
-            this.length += this.dna.branchGrowth * 1.9;
+            this.length += this.dna.branchGrowth * 1;
         } else {
             this.length += this.dna.branchGrowth;
         }
@@ -108,7 +108,7 @@ Segment.prototype.grow = function() {
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedLeft) {
-            // this.branch("left");
+            this.branch("left");
         }
 
     }
@@ -119,7 +119,7 @@ Segment.prototype.grow = function() {
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedRight) {
-            // this.branch("right");
+            this.branch("right");
         }
     }
     if (Math.random() <= this.dna.leafingProbability) {
