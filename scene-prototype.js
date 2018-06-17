@@ -12,7 +12,13 @@ Scene.prototype.addShape = function(s) {
     this.shapes.push(s);
 };
 
-Scene.prototype.registerLine = function(x1, y1, x2, y2, col) {
+Scene.prototype.registerLine = function(x1, y1, x2, y2, c) {
+    let col;
+    if (c) {
+        col = c;
+    } else {
+        col = { r: 0, g: 0, b: 0, a: 255 };
+    }
     this.shapes.push({
         type: "line",
         x1: x1,
@@ -23,11 +29,25 @@ Scene.prototype.registerLine = function(x1, y1, x2, y2, col) {
     });
 };
 
-Scene.prototype.registerEllipse = function(x, y) {
+Scene.prototype.registerEllipse = function(x, y, c) {
+    let col;
+    if (c) {
+        col = c;
+    } else {
+        col = { r: 0, g: 0, b: 0, a: 255 };
+    }
     this.shapes.push({
         type: "ellipse",
         x: x,
-        y: y
+        y: y,
+        col: col
+    });
+};
+
+Scene.prototype.registerPolygon = function(arr) {
+    this.shapes.push({
+        type: "polygon",
+        arr: arr
     });
 };
 
@@ -89,8 +109,18 @@ Scene.prototype.printObject = function(obj) {
     }
     if (obj.type == "ellipse") {
         sketch.noStroke();
-        sketch.fill(0, 255);
-        sketch.ellipse(obj.x, obj.y, 10);
+        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.ellipse(obj.x, obj.y, 5);
+    }
+    if (obj.type == "polygon") {
+        sketch.noStroke();
+        sketch.fill(0, 55);
+        sketch.beginShape();
+        for (let i = 0; i < obj.arr.length; i++) {
+            sketch.vertex(obj.arr[i].x, obj.arr[i].y);
+        }
+        sketch.endShape(sketch.CLOSE);
+        // sketch.ellipse(obj.x, obj.y, 10);
     }
 };
 

@@ -108,7 +108,7 @@ Segment.prototype.grow = function() {
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedLeft) {
-            this.branch("left");
+            // this.branch("left");
         }
 
     }
@@ -119,7 +119,7 @@ Segment.prototype.grow = function() {
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedRight) {
-            this.branch("right");
+            // this.branch("right");
         }
     }
     if (Math.random() <= this.dna.leafingProbability) {
