@@ -1,6 +1,6 @@
 let Scene = function() {
-    this.fileName = "./frames/foliage-002/botany";
-    this.maxFrames = 2250;
+    this.fileName = "./frames/foliage-004/botany";
+    this.maxFrames = 250;
     this.frameCount = 0;
     this.shapes = [];
     this.shapesPerFrame = 10000;
@@ -64,7 +64,7 @@ Scene.prototype.update = function() {
     }
     if (!this.framePrinted) {
         sketch.translate(sketch.width / 2, sketch.height - 50);
-        // sketch.scale(0.6, 0.6);
+        sketch.scale(0.6, 0.6);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {
                 this.printObject(this.shapes[i]);
@@ -114,7 +114,7 @@ Scene.prototype.printObject = function(obj) {
     }
     if (obj.type == "polygon") {
         sketch.noStroke();
-        sketch.fill(0, 55);
+        sketch.fill(0, 255);
         sketch.beginShape();
         for (let i = 0; i < obj.arr.length; i++) {
             sketch.vertex(obj.arr[i].x, obj.arr[i].y);

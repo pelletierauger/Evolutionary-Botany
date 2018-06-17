@@ -244,6 +244,9 @@ PetioleSegment.prototype.branch = function(direction) {
     }
 };
 
+PetioleSegment.prototype.gatherShapesDebug = function(x, y) {
+    scene.registerEllipse(x, y);
+};
 
 PetioleSegment.prototype.gatherShapes = function(x, y) {
     let a = this.angle;

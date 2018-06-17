@@ -66,6 +66,14 @@ let Segment = function(parent, direction) {
 };
 
 Segment.prototype.grow = function() {
+    if (this.children.length == 0) {
+        // if (Math.random() <= this.dna.leafingProbability) {
+        if (!this.leaf) {
+            this.makeLeaf();
+        }
+        // }
+    }
+
     if (this.isBranch) {
         if (Math.abs(this.angleDelta) < this.dna.branchingAngle) {
             if (this.branchedDirection == "left") {
@@ -108,23 +116,19 @@ Segment.prototype.grow = function() {
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedLeft) {
-            // this.branch("left");
+            this.branch("left");
         }
 
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedForward) {
+            this.branchedForward = true;
             this.branch("forward");
         }
     }
     if (Math.random() <= this.dna.branchingProbability) {
         if (!this.branchedRight) {
-            // this.branch("right");
-        }
-    }
-    if (Math.random() <= this.dna.leafingProbability) {
-        if (!this.leaf && !this.branchedForward) {
-            this.makeLeaf();
+            this.branch("right");
         }
     }
 };
@@ -169,11 +173,11 @@ Segment.prototype.gatherShapes = function(x, y) {
     // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
     scene.registerLine(x, y, newX, newY, { r: 0, g: 0, b: 0, a: 255 });
     // scene.registerLine(0, 1, 2, 3);
+    if (this.leaf) {
+        this.leaf.gatherShapes(newX, newY);
+    }
     for (let i = 0; i < this.children.length; i++) {
         this.children[i].gatherShapes(newX, newY);
-        if (this.children[i].leaf) {
-            this.children[i].leaf.gatherShapes(newX, newY);
-        }
     }
 };
 
