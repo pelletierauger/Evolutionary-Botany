@@ -13,7 +13,7 @@ var sketch = new p5(function(p) {
         p.frameRate(30);
         p.background(200);
         p.stroke(0, 255);
-        p.strokeWeight(2);
+        p.strokeWeight(6);
         if (!p.looping) {
             p.noLoop();
         }

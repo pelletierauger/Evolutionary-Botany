@@ -7,6 +7,8 @@ let Foliole = function(parent) {
     this.veinAmount = this.dna.folioleVeinAmount;
     this.veins = [];
     this.createVeins();
+    let c = sketch.random(0, 75);
+    this.col = { r: c, g: c, b: c, a: 255 };
 };
 
 Foliole.prototype.createVeins = function() {
@@ -24,10 +26,21 @@ Foliole.prototype.createVeins = function() {
 
 Foliole.prototype.grow = function() {
     for (let i = 0; i < this.veins.length; i++) {
-        this.veins[i].length += 0.1;
+
+        let growthMap = sketch.map(i, -2, this.veins.length, 0, Math.PI);
+        let growth = Math.sin(growthMap);
+        // growth *= Math.sin(growth * 0.5);
+        // growth = 1;
+        if (this.veins[i].length < this.dna.maxFolioleVeinLength) {
+            this.veins[i].length += this.dna.folioleVeinGrowth;
+        }
         this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.01 : 0.01;
-        this.veins[i].leftExtenderLength += 0.05;
-        this.veins[i].rightExtenderLength += 0.05;
+        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
+            this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * growth;
+        }
+        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
+            this.veins[i].rightExtenderLength += this.dna.folioleExtenderGrowth * growth;
+        }
     }
 };
 
@@ -36,7 +49,7 @@ Foliole.prototype.gatherShapesDebug = function(x, y) {
 };
 
 Foliole.prototype.gatherShapes = function(x, y) {
-    // scene.registerEllipse(x, y);
+    // scene.registerEllipse(x, y, { r: 255, g: 0, b: 0, a: 255 });
     let contourPoints = [];
     contourPoints.push({ x: x, y: y });
     let leftPoints = [];
@@ -52,7 +65,8 @@ Foliole.prototype.gatherShapes = function(x, y) {
             x: x + Math.cos(a) * l,
             y: y - Math.sin(a) * l
         };
-        // scene.registerEllipse(veinPos.x, veinPos.y);
+        // scene.registerEllipse(veinPos.x, veinPos.y, { r: 0, g: 255, b: 0, a: 255 });
+
         // We then get the position of its leftExtender
         let ll = vein.leftExtenderLength;
         let la = a + vein.leftExtenderAngleDelta;
@@ -100,6 +114,6 @@ Foliole.prototype.gatherShapes = function(x, y) {
 
     // var newX = x + Math.cos(a) * l;
     // var newY = y - Math.sin(a) * l;
-    scene.registerPolygon(contourPoints);
+    scene.registerPolygon(contourPoints, this.col);
     // scene.registerEllipse(x, y);
 };

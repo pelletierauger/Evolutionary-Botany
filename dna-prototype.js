@@ -6,12 +6,12 @@ let DNA = function() {
     this.branchingCost = 0.02;
 
     // Branching struture
-    this.branchGrowth = 0.5;
-    this.branchingAngle = Math.PI * 0.45;
+    this.branchGrowth = 0.2;
+    this.branchingAngle = Math.PI * 0.2;
     this.branchingProbability = 0.029;
     this.branchingFrequencyLeft = 4;
     this.branchingFrequencyRight = 4;
-    this.branchingOffsetLeft = 2;
+    this.branchingOffsetLeft = 0;
     this.branchingOffsetRight = 0;
     this.leafingProbability = 1;
 
@@ -30,11 +30,11 @@ let DNA = function() {
     this.petioleBranchingFrequencyRight = 4;
     this.petioleBranchingOffsetLeft = 0;
     this.petioleBranchingOffsetRight = 0;
-    this.petioluleDepth = 2;
+    this.petioluleDepth = 1;
     this.petioleTerminalFoliole = true;
     this.petioleMaxLeafletAmount = 10;
 
-    this.maxKnotsLevel0 = 2;
+    this.maxKnotsLevel0 = 3;
     this.maxKnotsLevel1 = 20;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;
@@ -42,13 +42,17 @@ let DNA = function() {
     this.maxKnotsLevel5 = 2;
 
     this.petioleMaxSegmentLengthLevel0 = 10;
-    this.petioleMaxSegmentLengthLevel1 = 2;
+    this.petioleMaxSegmentLengthLevel1 = 0;
     this.petioleMaxSegmentLengthLevel2 = 1;
     this.petioleMaxSegmentLengthLevel3 = 2;
     this.petioleMaxSegmentLengthLevel4 = 2;
     this.petioleMaxSegmentLengthLevel5 = 2;
 
-    this.folioleVeinAmount = 4;
+    this.folioleVeinAmount = 10;
+    this.maxFolioleVeinLength = 20;
+    this.maxFolioleWidth = 20;
+    this.folioleVeinGrowth = 0.1;
+    this.folioleExtenderGrowth = 0.1;
 
     // folioleHighestPoint is a float between zero and one.
     // If folioleHighestPoint == 0, there is no highest point

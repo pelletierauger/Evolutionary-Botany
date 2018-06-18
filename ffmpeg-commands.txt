@@ -37,3 +37,5 @@ ffmpeg -f image2 -framerate 24 -i ./frames/foliage-001/botany-%05d.png -c:v libx
 ffmpeg -f image2 -framerate 24 -i ./frames/foliage-002/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/foliage-002.mp4
 
 ffmpeg -f image2 -framerate 24 -i ./frames/foliage-003/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/foliage-003.mp4
+
+ffmpeg -f image2 -framerate 24 -i ./frames/foliage-004/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/foliage-004.mp4

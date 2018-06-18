@@ -1,6 +1,6 @@
 let Scene = function() {
     this.fileName = "./frames/foliage-004/botany";
-    this.maxFrames = 250;
+    this.maxFrames = 500;
     this.frameCount = 0;
     this.shapes = [];
     this.shapesPerFrame = 10000;
@@ -44,10 +44,17 @@ Scene.prototype.registerEllipse = function(x, y, c) {
     });
 };
 
-Scene.prototype.registerPolygon = function(arr) {
+Scene.prototype.registerPolygon = function(arr, c) {
+    let col;
+    if (c) {
+        col = c;
+    } else {
+        col = { r: 0, g: 0, b: 0, a: 255 };
+    }
     this.shapes.push({
         type: "polygon",
-        arr: arr
+        arr: arr,
+        col: c
     });
 };
 
@@ -64,7 +71,7 @@ Scene.prototype.update = function() {
     }
     if (!this.framePrinted) {
         sketch.translate(sketch.width / 2, sketch.height - 50);
-        sketch.scale(0.6, 0.6);
+        sketch.scale(0.4, 0.4);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {
                 this.printObject(this.shapes[i]);
@@ -114,7 +121,9 @@ Scene.prototype.printObject = function(obj) {
     }
     if (obj.type == "polygon") {
         sketch.noStroke();
-        sketch.fill(0, 255);
+        // let b = sketch.random(0, 100);
+        // sketch.fill(b, 255);
+        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
         sketch.beginShape();
         for (let i = 0; i < obj.arr.length; i++) {
             sketch.vertex(obj.arr[i].x, obj.arr[i].y);
