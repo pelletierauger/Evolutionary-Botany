@@ -22,7 +22,7 @@ let DNA = function() {
     this.petioleSegmentsToFoliole = 4;
     this.petioleSegmentGrowthCost = 0.01;
     this.petioleBranchingCost = 0.01;
-    this.petioleMaxAngleDelta = Math.PI * 0.25;
+    this.petioleMaxAngleDelta = Math.PI * 0.15;
     this.petioleAngleGrowth = 0.01;
     this.petioleBranchingProbability = 1;
     this.folioleProbability = 0.25;
@@ -34,7 +34,7 @@ let DNA = function() {
     this.petioleTerminalFoliole = true;
     this.petioleMaxLeafletAmount = 10;
 
-    this.maxKnotsLevel0 = 3;
+    this.maxKnotsLevel0 = 1;
     this.maxKnotsLevel1 = 20;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;
@@ -48,11 +48,11 @@ let DNA = function() {
     this.petioleMaxSegmentLengthLevel4 = 2;
     this.petioleMaxSegmentLengthLevel5 = 2;
 
-    this.folioleVeinAmount = 10;
+    this.folioleVeinAmount = 20;
     this.maxFolioleVeinLength = 20;
     this.maxFolioleWidth = 20;
     this.folioleVeinGrowth = 0.1;
-    this.folioleExtenderGrowth = 0.1;
+    this.folioleExtenderGrowth = 0.5;
 
     // folioleHighestPoint is a float between zero and one.
     // If folioleHighestPoint == 0, there is no highest point

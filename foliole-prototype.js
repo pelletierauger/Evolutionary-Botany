@@ -34,7 +34,7 @@ Foliole.prototype.grow = function() {
         if (this.veins[i].length < this.dna.maxFolioleVeinLength) {
             this.veins[i].length += this.dna.folioleVeinGrowth;
         }
-        this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.01 : 0.01;
+        this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.005 : 0.005;
         if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
             this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * growth;
         }
