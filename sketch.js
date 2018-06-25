@@ -1,5 +1,7 @@
 let JSONs;
 let tree;
+let zoomLevel = 1;
+let dna;
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -7,18 +9,22 @@ var sketch = new p5(function(p) {
     p.maxFrames = 450;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
         p.background(200);
         p.stroke(0, 255);
-        p.strokeWeight(6);
+        p.strokeWeight(3);
         if (!p.looping) {
             p.noLoop();
         }
-        let dna = new DNA();
+        dna = new DNA();
+        // dna = new Genotype();
+        // dna = dna.geneInterpretation;
         tree = new Tree(0, 0, dna);
+        tree = new Tree(-650, 0, dna);
+        tree = new Tree(650, 0, dna);
         // tree = new Tree(0, -p.height / 2 - 100, dna);
         // tree = new Tree(p.width / 3, -pr.height / 2 - 200, dna);
         // tree = new Tree(-p.width / 2.5, p.height / 2 - 350, dna);
@@ -54,5 +60,15 @@ var sketch = new p5(function(p) {
         if (p.key == 'm' || p.key == 'M') {
             p.redraw();
         }
+        if (p.key == 'k' || p.key == 'K') {
+            zoomLevel *= 0.5;
+        }
+        if (p.key == 'l' || p.key == 'L') {
+            zoomLevel *= 2;
+        }
+        if (p.key == 't' || p.key == 'T') {
+            tree.reroot();
+        }
+
     };
 });

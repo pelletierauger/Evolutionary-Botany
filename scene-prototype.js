@@ -71,7 +71,7 @@ Scene.prototype.update = function() {
     }
     if (!this.framePrinted) {
         sketch.translate(sketch.width / 2, sketch.height - 50);
-        sketch.scale(0.4, 0.4);
+        sketch.scale(zoomLevel, zoomLevel);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {
                 this.printObject(this.shapes[i]);
@@ -96,7 +96,7 @@ Scene.prototype.print = function() {
     if (this.shapes.length <= this.shapesPerFrame) {
         sketch.background(200);
         sketch.translate(sketch.width / 2, sketch.height - 100);
-        sketch.scale(0.6, 0.6);
+        sketch.scale(zoomLevel, zoomLevel);
         tree.grow();
         tree.gatherShapes();
         for (let i = 0; i < this.shapes.length; i++) {

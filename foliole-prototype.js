@@ -8,6 +8,7 @@ let Foliole = function(parent) {
     this.veins = [];
     this.createVeins();
     let c = sketch.random(0, 75);
+    c = 0;
     this.col = { r: c, g: c, b: c, a: 255 };
 };
 
@@ -34,7 +35,7 @@ Foliole.prototype.grow = function() {
         if (this.veins[i].length < this.dna.maxFolioleVeinLength) {
             this.veins[i].length += this.dna.folioleVeinGrowth;
         }
-        this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.005 : 0.005;
+        this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.0005 : 0.0005;
         if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
             this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * growth;
         }

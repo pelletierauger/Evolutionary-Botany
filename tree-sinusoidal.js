@@ -7,6 +7,10 @@ let Tree = function(x, y, dna) {
     scene.trees.push(this);
 };
 
+Tree.prototype.reroot = function() {
+    this.root = new Segment(this, "forward");
+};
+
 Tree.prototype.grow = function() {
     // this.pos.x += (Math.random() > 0.5) ? -1 : 1;
     // this.pos.y += (Math.random() > 0.5) ? -1 : 1;
@@ -89,17 +93,18 @@ Segment.prototype.grow = function() {
     }
     if (Math.abs(this.angleDelta) < this.dna.branchingAngle * 0.2) {
         let freq = 1 + this.SegmentPosition * 0.5;
+        // freq *= this.dna.branchingAngleFrequencyScalar;
         // freq = (freq * -this.segmentID);
-        freq = Math.pow(freq, -3);
+        freq = Math.pow(freq, this.dna.branchingAngleFrequencyScalar);
         if (this.lastBranching == "left") {
             this.angleDelta += (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "right") {
             this.angleDelta -= (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "forward") {
-            // this.angleDelta -= (Math.cos(freq) * 0.0001) * this.coin;
+            this.angleDelta -= (Math.cos(freq) * 0.0001) * this.coin;
         }
     }
-    this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
+    // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
     this.angle = this.parent.angle + this.angleDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
