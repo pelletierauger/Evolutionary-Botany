@@ -35,6 +35,7 @@ var sketch = new p5(function(p) {
             JSONs = data;
         });
         p.socket.emit('pullJSONs', "");
+        scene.terrain.makeHills();
     };
 
     p.draw = function() {

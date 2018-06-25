@@ -6,6 +6,7 @@ let Scene = function() {
     this.shapesPerFrame = 10000;
     this.framePrinted = true;
     this.trees = [];
+    this.hills = [];
 };
 
 Scene.prototype.addShape = function(s) {
@@ -54,7 +55,7 @@ Scene.prototype.registerPolygon = function(arr, c) {
     this.shapes.push({
         type: "polygon",
         arr: arr,
-        col: c
+        col: col
     });
 };
 
@@ -62,10 +63,13 @@ Scene.prototype.update = function() {
     if (this.framePrinted) {
         this.frameCount++;
         sketch.background(200);
-        for (let i = 0; i <  this.trees.length; i++) {
+        for (let i = 0; i < this.trees.length; i++) {
             this.trees[i].grow();
             this.trees[i].grow();
             this.trees[i].gatherShapes();
+        }
+        for (let i = 0; i < this.hills.length; i++) {
+            this.hills[i].gatherShapes();
         }
         this.framePrinted = false;
     }
