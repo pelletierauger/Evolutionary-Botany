@@ -1,6 +1,6 @@
 let JSONs;
 let tree;
-let zoomLevel = 1;
+let zoomLevel = 0.5;
 let dna;
 
 var sketch = new p5(function(p) {
@@ -23,8 +23,8 @@ var sketch = new p5(function(p) {
         // dna = new Genotype();
         // dna = dna.geneInterpretation;
         tree = new Tree(0, 0, dna);
-        tree = new Tree(-650, 0, dna);
-        tree = new Tree(650, 0, dna);
+        // tree = new Tree(-650, 0, dna);
+        // tree = new Tree(650, 0, dna);
         // tree = new Tree(0, -p.height / 2 - 100, dna);
         // tree = new Tree(p.width / 3, -pr.height / 2 - 200, dna);
         // tree = new Tree(-p.width / 2.5, p.height / 2 - 350, dna);

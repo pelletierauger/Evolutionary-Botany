@@ -6,11 +6,11 @@ let DNA = function() {
     this.branchingCost = 0.02;
 
     // Branching struture
-    this.branchGrowth = 0.025;
+    this.branchGrowth = 0.25;
     this.branchingAngle = Math.PI * 0.2;
-    this.branchingProbability = 0.02;
-    this.branchingFrequencyLeft = 8;
-    this.branchingFrequencyRight = 8;
+    this.branchingProbability = 0.04;
+    this.branchingFrequencyLeft = 4;
+    this.branchingFrequencyRight = 4;
     this.branchingOffsetLeft = 0;
     this.branchingOffsetRight = 0;
     this.leafingProbability = 1;

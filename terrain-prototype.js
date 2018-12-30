@@ -1,9 +1,11 @@
     let Terrain = function() {
-        this.amountOfHills = 5;
+        this.amountOfHills = 10;
         // A float between 0 and 1, 0 being the top of the scene, 1 being the bottom.
         this.horizon = 0.5;
+        // A float between 0 and 1, 0 being 0 on the y axis, and 1 being sketch.height;
+        this.bottom = 0.1;
         this.width = 1300;
-        this.depth = 500;
+        this.depth = 1000;
         this.unit = 10;
         this.hills = [];
         scene.terrain = this;
@@ -19,13 +21,15 @@
 
     let Hill = function(ind, parent) {
         this.parent = parent;
-        let height = parent.height * parent.horizon;
-        height = sketch.map(ind, 0, parent.amountOfHills, height, 0);
+        this.ind = ind;
+        let top = (parent.height * parent.horizon);
+        let bottom = (parent.height * parent.bottom);
+        let baseHeight = sketch.map(ind, 0, parent.amountOfHills, -bottom, top);
         this.basePoint = { x: -parent.width, y: this.parent.depth };
         this.points = [this.basePoint];
 
         for (let x = 0; x < this.parent.width * 2; x += this.parent.unit) {
-            let y = (sketch.noise(x * 0.0009, ind) * -500) - height;
+            let y = (sketch.noise(x * 0.0009, ind) * -500) - baseHeight;
             this.points.push({ x: x - this.parent.width, y: y });
         }
         this.points.push({ x: parent.width, y: this.parent.depth });

@@ -1,5 +1,5 @@
 let Scene = function() {
-    this.fileName = "./frames/foliage-004/botany";
+    this.fileName = "./frames/scene-001/botany";
     this.maxFrames = 500;
     this.frameCount = 0;
     this.shapes = [];
@@ -59,7 +59,9 @@ Scene.prototype.registerPolygon = function(arr, c) {
     });
 };
 
+let lll = 0;
 Scene.prototype.update = function() {
+
     if (this.framePrinted) {
         this.frameCount++;
         sketch.background(200);
@@ -71,6 +73,7 @@ Scene.prototype.update = function() {
         for (let i = 0; i < this.hills.length; i++) {
             this.hills[i].gatherShapes();
         }
+        lll = this.shapes.length;
         this.framePrinted = false;
     }
     if (!this.framePrinted) {

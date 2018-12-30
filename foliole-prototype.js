@@ -8,7 +8,7 @@ let Foliole = function(parent) {
     this.veins = [];
     this.createVeins();
     let c = sketch.random(0, 75);
-    c = 0;
+    // c = 0;
     this.col = { r: c, g: c, b: c, a: 255 };
 };
 

@@ -101,7 +101,7 @@ Segment.prototype.grow = function() {
         } else if (this.lastBranching == "right") {
             this.angleDelta -= (Math.cos(freq) * 0.001);
         } else if (this.lastBranching == "forward") {
-            this.angleDelta -= (Math.cos(freq) * 0.0001) * this.coin;
+            this.angleDelta -= (Math.cos(freq) * 0.001) * this.coin;
         }
     }
     // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
