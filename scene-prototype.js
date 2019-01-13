@@ -64,7 +64,7 @@ Scene.prototype.update = function() {
 
     if (this.framePrinted) {
         this.frameCount++;
-        sketch.background(200);
+        sketch.graphics.background(200);
         for (let i = 0; i < this.trees.length; i++) {
             this.trees[i].grow();
             this.trees[i].grow();
@@ -77,8 +77,9 @@ Scene.prototype.update = function() {
         this.framePrinted = false;
     }
     if (!this.framePrinted) {
-        sketch.translate(sketch.width / 2, sketch.height - 50);
-        sketch.scale(zoomLevel, zoomLevel);
+        sketch.graphics.push();
+        sketch.graphics.translate(sketch.width / 2, sketch.height - 50);
+        sketch.graphics.scale(zoomLevel, zoomLevel);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {
                 this.printObject(this.shapes[i]);
@@ -93,17 +94,18 @@ Scene.prototype.update = function() {
     }
     if (this.shapes.length == 0) {
         this.framePrinted = true;
+        sketch.graphics.pop();
         if (exporting && this.frameCount < this.maxFrames) {
             frameExport(sketch);
         }
     }
 };
 
-Scene.prototype.print = function() {
+Scene.prototype.printz = function() {
     if (this.shapes.length <= this.shapesPerFrame) {
-        sketch.background(200);
-        sketch.translate(sketch.width / 2, sketch.height - 100);
-        sketch.scale(zoomLevel, zoomLevel);
+        sketch.graphics.background(200);
+        sketch.graphics.translate(sketch.width / 2, sketch.height - 100);
+        sketch.graphics.scale(zoomLevel, zoomLevel);
         tree.grow();
         tree.gatherShapes();
         for (let i = 0; i < this.shapes.length; i++) {
@@ -118,25 +120,25 @@ Scene.prototype.print = function() {
 
 Scene.prototype.printObject = function(obj) {
     if (obj.type == "line") {
-        sketch.stroke(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.line(obj.x1, obj.y1, obj.x2, obj.y2);
+        sketch.graphics.stroke(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.graphics.line(obj.x1, obj.y1, obj.x2, obj.y2);
     }
     if (obj.type == "ellipse") {
-        sketch.noStroke();
-        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.ellipse(obj.x, obj.y, 5);
+        sketch.graphics.noStroke();
+        sketch.graphics.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.graphics.ellipse(obj.x, obj.y, 5);
     }
     if (obj.type == "polygon") {
-        sketch.noStroke();
-        // let b = sketch.random(0, 100);
-        // sketch.fill(b, 255);
-        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.beginShape();
+        sketch.graphics.noStroke();
+        // let b = sketch.graphics.random(0, 100);
+        // sketch.graphics.fill(b, 255);
+        sketch.graphics.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.graphics.beginShape();
         for (let i = 0; i < obj.arr.length; i++) {
-            sketch.vertex(obj.arr[i].x, obj.arr[i].y);
+            sketch.graphics.vertex(obj.arr[i].x, obj.arr[i].y);
         }
-        sketch.endShape(sketch.CLOSE);
-        // sketch.ellipse(obj.x, obj.y, 10);
+        sketch.graphics.endShape(sketch.graphics.CLOSE);
+        // sketch.graphics.ellipse(obj.x, obj.y, 10);
     }
 };
 

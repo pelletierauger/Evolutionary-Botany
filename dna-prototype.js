@@ -6,11 +6,11 @@ let DNA = function() {
     this.branchingCost = 0.02;
 
     // Branching struture
-    this.branchGrowth = 0.25;
+    this.branchGrowth = 0.125;
     this.branchingAngle = Math.PI * 0.2;
-    this.branchingProbability = 0.04;
-    this.branchingFrequencyLeft = 4;
-    this.branchingFrequencyRight = 4;
+    this.branchingProbability = 0.01;
+    this.branchingFrequencyLeft = 2;
+    this.branchingFrequencyRight = 3;
     this.branchingOffsetLeft = 0;
     this.branchingOffsetRight = 0;
     this.leafingProbability = 1;
@@ -36,7 +36,7 @@ let DNA = function() {
     this.petioleTerminalFoliole = true;
     this.petioleMaxLeafletAmount = 10;
 
-    this.maxKnotsLevel0 = 5;
+    this.maxKnotsLevel0 = 2;
     this.maxKnotsLevel1 = 20;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;

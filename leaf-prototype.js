@@ -253,6 +253,11 @@ PetioleSegment.prototype.gatherShapes = function(x, y) {
     let l = this.length;
     var newX = x + Math.cos(a) * l;
     var newY = y - Math.sin(a) * l;
+
+    this.x0 = x;
+    this.y0 = y;
+    this.x1 = newX;
+    this.y1 = newY;
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));
     // sketch.line(x, y, newX, newY);
     // console.log("x: " + x + ", y: " + y + ", newX: " + newX + " newY: " + newY);
