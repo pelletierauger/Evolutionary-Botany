@@ -6,6 +6,7 @@ let dna;
 let treeIsGrowing = true;
 let walking = true;
 let socket;
+let growthScalar = 1;
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -30,7 +31,7 @@ var sketch = new p5(function(p) {
         dna = new DNA();
         // dna = new Genotype();
         // dna = dna.geneInterpretation;
-        tree = new Tree(0, 0, dna);
+        tree = new Tree(200, -20, dna);
         song = new Song();
         // tree = new Tree(-650, 0, dna);
         // tree = new Tree(650, 0, dna);
