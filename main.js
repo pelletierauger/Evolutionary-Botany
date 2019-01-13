@@ -1,0 +1,1 @@
+var tonalKey = require('./node_modules/tonal-key');
