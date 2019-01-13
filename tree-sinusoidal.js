@@ -108,9 +108,9 @@ Segment.prototype.grow = function() {
     this.angle = this.parent.angle + this.angleDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
-            this.length += this.dna.branchGrowth * 1;
+            this.length += this.dna.branchGrowth * growthScalar;
         } else {
-            this.length += this.dna.branchGrowth;
+            this.length += this.dna.branchGrowth * growthScalar;
         }
         // this.length += this.dna.branchGrowth;
         this.energy -= this.dna.branchGrowthCost;
@@ -121,21 +121,23 @@ Segment.prototype.grow = function() {
             this.children[i].leaf.grow();
         }
     }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedLeft) {
-            this.branch("left");
-        }
+    if (growthScalar) {
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedLeft) {
+                this.branch("left");
+            }
 
-    }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedForward) {
-            this.branchedForward = true;
-            this.branch("forward");
         }
-    }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedRight) {
-            this.branch("right");
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedForward) {
+                this.branchedForward = true;
+                this.branch("forward");
+            }
+        }
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedRight) {
+                this.branch("right");
+            }
         }
     }
 };
