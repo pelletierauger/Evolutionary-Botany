@@ -31,7 +31,7 @@ var sketch = new p5(function(p) {
         dna = new DNA();
         // dna = new Genotype();
         // dna = dna.geneInterpretation;
-        tree = new Tree(200, -20, dna);
+        tree = new Tree(300, -20, dna);
         song = new Song();
         // tree = new Tree(-650, 0, dna);
         // tree = new Tree(650, 0, dna);
@@ -53,7 +53,6 @@ var sketch = new p5(function(p) {
             scene.update();
         }
         p.image(p.graphics, 0, 0, p.width, p.height);
-        sketch.ellipse(200, 200, 20);
         sketch.translate(sketch.width / 2, sketch.height - 50);
         sketch.scale(zoomLevel, zoomLevel);
         if (walking) {
