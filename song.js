@@ -23,6 +23,7 @@ let ranges = [1, 2, 3, 4, 5];
 // tree.reroot();
 // growthScalar = 0;
 // growthScalar = 1;
+// treeIsGrowing = !treeIsGrowing;
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[0]);
@@ -42,7 +43,7 @@ let ranges = [1, 2, 3, 4, 5];
 
 // newWalker();
 // // notes = Tonal.Chord.notes(triads[3] + "dim");
-// notes = Tonal.Chord.notes("F7");
+// notes = Tonal.Chord.notes("G#m7");
 // ranges = [1, 2, 3, 4, 5];
 // logJavaScriptConsole(notes);
 
@@ -50,13 +51,13 @@ let ranges = [1, 2, 3, 4, 5];
 // notes = Tonal.Chord.notes(triads[5]);
 // ranges = [2, 3, 4, 5, 6];
 // logJavaScriptConsole(notes);
-// logJavaScriptConsole(triads[3]);
-// logJavaScriptConsole(Tonal.Chord.notes("F#dim7"));
+// logJavaScriptConsole(triads[5]);
+// // logJavaScriptConsole(Tonal.Chord.notes("F#dim7"));
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[6]);
 // logJavaScriptConsole(notes);
 
 // newWalker();
-// notes = Tonal.Chord.notes(triads[6] + "dim");
+// notes = Tonal.Chord.notes("Bm7");
 // logJavaScriptConsole(notes);
