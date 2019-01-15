@@ -11,9 +11,9 @@ let Walker = function(parent) {
 
 Walker.prototype.sing = function() {
     // let osc = song.getFrequency(this.v.freq);
-    let octave = sketch.random(ranges);
-    let whichNote = sketch.random(notes);
-    let frequency = Tonal.Note.freq(whichNote + "" + octave);
+    let octave = sketch.random(octaves);
+    let note = sketch.random(notes);
+    let frequency = Tonal.Note.freq(note + "" + octave);
     //     socket.emit('note', sketch.random([110, 220, 440, 660, 880]));
     socket.emit('note', frequency);
     this.hasSung = true;
