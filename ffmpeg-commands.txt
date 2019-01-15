@@ -41,3 +41,15 @@ ffmpeg -f image2 -framerate 24 -i ./frames/foliage-003/botany-%05d.png -c:v libx
 ffmpeg -f image2 -framerate 24 -i ./frames/foliage-004/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/foliage-004.mp4
 
 ffmpeg -f image2 -framerate 24 -i ./frames/scene-001/botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p ./video-renders/scene-001.mp4
+
+
+
+
+ffmpeg -i /Users/guillaumepelletier/Movies/2019-01-13_17-30-29.mkv -itsoffset 3.84 -i /Users/guillaumepelletier/Music/SuperCollider\ Recordings/SC_190113_173025.aiff -map 0:v -map 1:a -c copy "movie-audio-delayed.mp4"
+
+ffmpeg -i /Users/guillaumepelletier/Movies/2019-01-13_17-30-29.mkv -itsoffset -4.3 -i /Users/guillaumepelletier/Music/SuperCollider\ Recordings/SC_190113_173025.aiff -map 0:v -map 1:a -c:v libx264 -pix_fmt yuv420p movie-audio-delayed.mp4
+
+ffmpeg -i /Users/guillaumepelletier/Movies/2019-01-13_17-57-45.mkv -itsoffset -4.3 -i /Users/guillaumepelletier/Music/SuperCollider\ Recordings/SC_190113_175748.aiff -map 0:v -map 1:a -c:v libx264 -pix_fmt yuv420p musical-trees.mp4
+
+
+
