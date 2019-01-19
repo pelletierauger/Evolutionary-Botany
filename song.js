@@ -10,7 +10,7 @@ let Song = function() {
 triads = Tonal.Key.triads("A major");
 triads = Tonal.Key.triads("E dorian");
 triads = Tonal.Key.chords("C# dorian");
-// logJavaScriptConsole(triads);
+logJavaScriptConsole(triads);
 notes = Tonal.Chord.notes(triads[3]);
 // logJavaScriptConsole(notes);
 note = Tonal.Note.freq(notes[0] + "" + 2);
@@ -27,32 +27,28 @@ let octaves = [1, 2, 3, 4, 5];
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[0]);
-// octaves = [1, 2, 3, 4, 5];
+// octaves = [1, 2, 3, 4, 5, 6];
 // logJavaScriptConsole(notes);
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[3]);
-// octaves = [1, 2, 3, 4, 5];
+// octaves = [1, 2, 3, 4, 5, 6];
 // logJavaScriptConsole(notes);
 
 // newWalker();
-// // notes = Tonal.Chord.notes(triads[3] + "dim");
 // notes = Tonal.Chord.notes("F#dim7");
-// octaves = [1, 2, 3, 4, 5];
+// octaves = [1, 2, 3, 4, 5, 6];
 // logJavaScriptConsole(notes);
 
 // newWalker();
-// // notes = Tonal.Chord.notes(triads[3] + "dim");
 // notes = Tonal.Chord.notes("G#m7");
 // octaves = [1, 2, 3, 4, 5];
 // logJavaScriptConsole(notes);
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[5]);
-// octaves = [2, 3, 4, 5, 6];
+// octaves = [2, 3, 4, 5, 6, 7];
 // logJavaScriptConsole(notes);
-// logJavaScriptConsole(triads[5]);
-// // logJavaScriptConsole(Tonal.Chord.notes("F#dim7"));
 
 // newWalker();
 // notes = Tonal.Chord.notes(triads[6]);
