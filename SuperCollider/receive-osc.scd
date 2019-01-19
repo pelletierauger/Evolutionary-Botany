@@ -2,10 +2,48 @@ s.boot;
 s.quit;
 
 (
+~sourceGroup = Group.new;
+~fxGroup = Group.after(~sourceGroup);
+~volumeBus = Bus.audio(s, 2);
+~reverbBus = Bus.audio(s, 2);
+)
+
+(
+SynthDef.new(\reverb, {
+    arg in, out = 0;
+    var sig, del, del2;
+    sig = In.ar(in, 2);
+    del = CombC.ar(in: sig[0],
+    maxdelaytime: 0.1,
+    delaytime: 0.1,
+    decaytime: 20,
+    mul: 1, add: 0);
+    del2 = CombC.ar(in: sig[1],
+    maxdelaytime: 0.12,
+    delaytime: 0.2,
+    decaytime: 20,
+    mul: 1, add: 0);
+	sig[0] = sig[0] + (del * 0.125);
+    sig[1] = sig[1] + (del2 * 0.125);
+    Out.ar(0, sig);
+}).add;
+)
+
+(
+~reverbSynth.free;
+~reverbSynth = Synth.new(\reverb, [\in, ~reverbBus, \out, ~volumeBus], ~fxGroup);
+)
+
+(
+h.free;
+h = Synth.new(\pulse, [\freq, 660]);
+)
+
+(
 SynthDef(\pulse, {
 	arg freq = 440, pul1 = 1, pul2 = 1, pan = 0, out = 0, amp = 1;
 	var sig, mod, lp, sp, env;
-    mod = SinOsc.kr(6) * 0.5;
+    mod = SinOsc.kr(3) * 0.5;
     // sp = abs(SinOsc.kr(0.1)) * 220;
 	sig = Impulse.ar(0.1, mul: 0.4)!2;
     // sig2 = Impulse.ar(pul2, mul: 0.4)!2;
@@ -27,8 +65,14 @@ SynthDef(\pulse, {
 )
 
 (
-h.free;
-h = Synth.new(\pulse, [\freq, 330]);
+OSCdef.new(
+    \fromnode,
+    {
+        arg msg, time, addr, port;
+        Synth.new(\pulse, [\freq, msg[1], \pan, rrand(-1.0, 1.0)]);
+    },
+    '/hello/from/oscjs'
+);
 )
 
 (
@@ -46,49 +90,6 @@ SynthDef.new(\pulseTest, {
     Out.ar(0, sig1);
     Out.ar(1, sig2);
 }).add;
-)
-
-
-(
-OSCdef.new(
-    \fromnode,
-    {
-        arg msg, time, addr, port;
-        // [msg, time, addr, port].postln;
-        // msg[1].postln;
-        d = Synth.new(\pulse, [\freq, msg[1]]);
-//         d = Synth.new(\pulseTest, [\frequency, msg[1] * 0.5]);
-    },
-    '/hello/from/oscjs'
-);
-)
-
-
-(
-~sourceGroup = Group.new;
-~fxGroup = Group.after(~sourceGroup);
-~volumeBus = Bus.audio(s, 2);
-~reverbBus = Bus.audio(s, 2);
-)
-(
-SynthDef.new(\reverb, {
-    arg in, out = 0;
-    var sig, del;
-    sig = In.ar(in, 2);
-    del = CombC.ar(in: sig,
-    maxdelaytime: 0.1,
-    delaytime: [0.25, 0.26],
-    decaytime: 20,
-    mul: 1, add: 0);
-	sig = sig + (del * 0.125);
-    Out.ar(out, sig);
-    Out.ar(0, sig);
-}).add;
-)
-
-(
-~reverbSynth.free;
-~reverbSynth = Synth.new(\reverb, [\in, ~reverbBus, \out, ~volumeBus], ~fxGroup);
 )
 
 s.record;
