@@ -61,10 +61,9 @@ Scene.prototype.registerPolygon = function(arr, c) {
 
 let lll = 0;
 Scene.prototype.update = function() {
-
     if (this.framePrinted) {
         this.frameCount++;
-        sketch.graphics.background(200);
+        sketch.graphics.background(205);
         for (let i = 0; i < this.trees.length; i++) {
             this.trees[i].grow();
             this.trees[i].grow();
