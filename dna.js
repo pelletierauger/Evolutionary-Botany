@@ -37,7 +37,7 @@ let DNA = function() {
     this.petioleMaxLeafletAmount = 10;
 
     this.maxKnotsLevel0 = 2;
-    this.maxKnotsLevel1 = 20;
+    this.maxKnotsLevel1 = 2;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;
     this.maxKnotsLevel4 = 2;
@@ -50,8 +50,8 @@ let DNA = function() {
     this.petioleMaxSegmentLengthLevel4 = 2;
     this.petioleMaxSegmentLengthLevel5 = 2;
 
-    this.folioleVeinAmount = 20;
-    this.maxFolioleVeinLength = 2;
+    this.folioleVeinAmount = 10;
+    this.maxFolioleVeinLength = 4;
     this.maxFolioleWidth = 5;
     this.folioleVeinGrowth = 0.1;
     this.folioleExtenderGrowth = 0.5;

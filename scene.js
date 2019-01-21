@@ -119,24 +119,31 @@ Scene.prototype.printz = function() {
 
 Scene.prototype.printObject = function(obj) {
     if (obj.type == "line") {
-        sketch.graphics.stroke(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.graphics.line(obj.x1, obj.y1, obj.x2, obj.y2);
+        // sketch.graphics.stroke(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        // sketch.graphics.line(obj.x1, obj.y1, obj.x2, obj.y2);
+        let l = makeLine(obj.x1, obj.y1, obj.x2, obj.y2, 1);
+        sketch.fill(120);
+        sketch.beginShape();
+        for (let i = 0; i < l.length; i++) {
+            sketch.vertex(l[i][0], l[i][1]);
+        }
+        sketch.endShape(sketch.CLOSE);
     }
     if (obj.type == "ellipse") {
-        sketch.graphics.noStroke();
-        sketch.graphics.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.graphics.ellipse(obj.x, obj.y, 5);
+        // sketch.graphics.noStroke();
+        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.ellipse(obj.x, obj.y, 5);
     }
     if (obj.type == "polygon") {
-        sketch.graphics.noStroke();
+        // sketch.graphics.noStroke();
         // let b = sketch.graphics.random(0, 100);
         // sketch.graphics.fill(b, 255);
-        sketch.graphics.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
-        sketch.graphics.beginShape();
+        sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        sketch.beginShape();
         for (let i = 0; i < obj.arr.length; i++) {
-            sketch.graphics.vertex(obj.arr[i].x, obj.arr[i].y);
+            sketch.vertex(obj.arr[i].x, obj.arr[i].y);
         }
-        sketch.graphics.endShape(sketch.graphics.CLOSE);
+        sketch.endShape(sketch.CLOSE);
         // sketch.graphics.ellipse(obj.x, obj.y, 10);
     }
 };
@@ -146,3 +153,24 @@ let scene = new Scene({
     type: "line",
     frameRate: 24
 });
+
+function makeLine(x0, y0, x1, y1, weight) {
+    let w = weight;
+    let a0 = Math.atan2(y1 - y0, x1 - x0);
+    let halfPI = Math.PI * 0.5;
+    let xA = x0 + Math.cos(a0 + halfPI) * w;
+    let yA = y0 + Math.sin(a0 + halfPI) * w;
+    let xB = x0 + Math.cos(a0 - halfPI) * w;
+    let yB = y0 + Math.sin(a0 - halfPI) * w;
+    let a1 = Math.atan2(y0 - y1, x0 - x1);
+    let xC = x1 + Math.cos(a1 + halfPI) * w;
+    let yC = y1 + Math.sin(a1 + halfPI) * w;
+    let xD = x1 + Math.cos(a1 - halfPI) * w;
+    let yD = y1 + Math.sin(a1 - halfPI) * w;
+    return [
+        [xA, yA],
+        [xB, yB],
+        [xC, yC],
+        [xD, yD]
+    ];
+}
