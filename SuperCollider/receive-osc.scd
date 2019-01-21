@@ -77,27 +77,27 @@ OSCdef.new(
             \amp, 30,
             \rel, 0.26
         ]);
-//         Synth.new(\triangle, [
-//             \freq, msg[1] * [0.5, 1].choose, 
-//             \pan, rrand(-1.0, 1.0),
-//             \amp, 0.125 * 1.5,
-//             \rel, 0.4 * 8 * 2,
-//             \mod, [1, 3, 6].choose
-//         ]);
+        Synth.new(\triangle, [
+            \freq, msg[1] * [0.5, 1].choose, 
+            \pan, rrand(-1.0, 1.0),
+            \amp, 0.125 * 1.5,
+            \rel, 0.4 * 8 * 2,
+            \mod, [1, 3, 6].choose
+        ]);
 //         Synth.new(\voice, [
 //             \rate, msg[1] * 0.5, 
 //             \spos, 487728 * 0.73
 //         ]);
-        Pbind(
-            \instrument, \voice,
-            \dur, Pseq([0.125, 0.25], 6),
-            \rate, msg[1] * 1 * Prand([1, 0.5, 0.5], 20), 
-            \spos, 487728 * 0.73,
-            \amp, Pgeom(2, 0.7, 20),
-            \rel, Pgeom(0.15, 1.01, 20),
-            \pan, Pwhite(-1.0, 1.0, 20)
-        ).play;
-        if (10.rand < 2, {
+//         Pbind(
+//             \instrument, \voice,
+//             \dur, Pseq([0.125, 0.25], 6),
+//             \rate, msg[1] * 1 * Prand([1, 0.5, 0.5], 20), 
+//             \spos, 487728 * 0.73,
+//             \amp, Pgeom(2, 0.7, 20),
+//             \rel, Pgeom(0.15, 1.01, 20),
+//             \pan, Pwhite(-1.0, 1.0, 20)
+//         ).play;
+        if (40.rand < 2, {
             Pbind(
                 \instrument, \percu,
 //                 \dur, Prand([1, 0.25, 0.125], 40),
@@ -106,7 +106,7 @@ OSCdef.new(
                 \spos, 1717440,
 //                 \rate, Pseq([1], 40),
                 \rate, Prand([0.5, 1, 2, 4], 40),
-                \amp, Pgeom(2, 0.9, 40),
+                \amp, Pgeom(3, 0.9, 40),
                 \pan, Pwhite(-1, 1, 40),
                 \buf, Prand([
                     ~beats[0], 
@@ -114,7 +114,8 @@ OSCdef.new(
                     ~beats[2], 
                     ~beats[3]
                 ], 12),
-                \out, ~reverbBus
+//                 \out, ~reverbBus
+                \out, 0
             ).play(t, quant: 1);
         });
     },
