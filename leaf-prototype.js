@@ -144,7 +144,9 @@ PetioleSegment.prototype.grow = function() {
             }
         }
     }
-    this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
+    if (growth) {
+        this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
+    }
     this.angle = this.parent.angle + this.angleDelta;
     //------------------------------------------------------------------------------
 

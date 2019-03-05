@@ -96,21 +96,23 @@ Segment.prototype.grow = function() {
         // freq *= this.dna.branchingAngleFrequencyScalar;
         // freq = (freq * -this.segmentID);
         freq = Math.pow(freq, this.dna.branchingAngleFrequencyScalar);
-        if (this.lastBranching == "left") {
-            this.angleDelta += (Math.cos(freq) * 0.001);
-        } else if (this.lastBranching == "right") {
-            this.angleDelta -= (Math.cos(freq) * 0.001);
-        } else if (this.lastBranching == "forward") {
-            this.angleDelta -= (Math.cos(freq) * 0.001) * this.coin;
+        if (growth) {
+            if (this.lastBranching == "left") {
+                this.angleDelta += (Math.cos(freq) * 0.001);
+            } else if (this.lastBranching == "right") {
+                this.angleDelta -= (Math.cos(freq) * 0.001);
+            } else if (this.lastBranching == "forward") {
+                this.angleDelta -= (Math.cos(freq) * 0.001) * this.coin;
+            }
         }
     }
     // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
     this.angle = this.parent.angle + this.angleDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
-            this.length += this.dna.branchGrowth * 1;
+            this.length += this.dna.branchGrowth * growthScalar;;
         } else {
-            this.length += this.dna.branchGrowth;
+            this.length += this.dna.branchGrowth * growthScalar;;
         }
         // this.length += this.dna.branchGrowth;
         this.energy -= this.dna.branchGrowthCost;
@@ -121,21 +123,23 @@ Segment.prototype.grow = function() {
             this.children[i].leaf.grow();
         }
     }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedLeft) {
-            this.branch("left");
-        }
+    if (growthScalar) {
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedLeft) {
+                this.branch("left");
+            }
 
-    }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedForward) {
-            this.branchedForward = true;
-            this.branch("forward");
         }
-    }
-    if (Math.random() <= this.dna.branchingProbability) {
-        if (!this.branchedRight) {
-            this.branch("right");
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedForward) {
+                this.branchedForward = true;
+                this.branch("forward");
+            }
+        }
+        if (Math.random() <= this.dna.branchingProbability) {
+            if (!this.branchedRight) {
+                this.branch("right");
+            }
         }
     }
 };

@@ -2,6 +2,8 @@ let JSONs;
 let tree;
 let zoomLevel = 0.5;
 let dna;
+let growth = true;
+let growthScalar = 1;
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -70,6 +72,9 @@ var sketch = new p5(function(p) {
         if (p.key == 't' || p.key == 'T') {
             tree.reroot();
         }
-
+        if (p.key == 'g' || p.key == 'G') {
+            growth = !growth;
+            growthScalar = (growth) ? 1 : 0;
+        }
     };
 });
