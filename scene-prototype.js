@@ -67,7 +67,7 @@ Scene.prototype.update = function() {
         sketch.background(200);
         for (let i = 0; i < this.trees.length; i++) {
             this.trees[i].grow();
-            this.trees[i].grow();
+            // this.trees[i].grow();
             this.trees[i].gatherShapes();
         }
         for (let i = 0; i < this.hills.length; i++) {

@@ -6,7 +6,7 @@ let DNA = function() {
     this.branchingCost = 0.02;
 
     // Branching struture
-    this.branchGrowth = 0.25;
+    this.branchGrowth = 0.45;
     this.branchingAngle = Math.PI * 0.2;
     this.branchingProbability = 0.04;
     this.branchingFrequencyLeft = 4;
@@ -51,8 +51,8 @@ let DNA = function() {
     this.petioleMaxSegmentLengthLevel5 = 2;
 
     this.folioleVeinAmount = 20;
-    this.maxFolioleVeinLength = 2;
-    this.maxFolioleWidth = 5;
+    this.maxFolioleVeinLength = 4;
+    this.maxFolioleWidth = 10;
     this.folioleVeinGrowth = 0.1;
     this.folioleExtenderGrowth = 0.5;
 

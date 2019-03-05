@@ -66,6 +66,7 @@ let Segment = function(parent, direction) {
     }
     this.angle = this.parent.angle;
     this.angleDelta = 0;
+    this.swayingDelta = 0;
     this.children = [];
     this.length = 0;
     this.leaf = null;
@@ -107,7 +108,9 @@ Segment.prototype.grow = function() {
         }
     }
     // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
+    this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
     this.angle = this.parent.angle + this.angleDelta;
+    this.angle += this.swayingDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
             this.length += this.dna.branchGrowth * growthScalar;;

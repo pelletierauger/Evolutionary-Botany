@@ -4,6 +4,12 @@ let zoomLevel = 0.5;
 let dna;
 let growth = true;
 let growthScalar = 1;
+const seed = Date.now();
+const openSimplex = openSimplexNoise(seed);
+const framesPerLoop = 100;
+const noiseIncrement = Math.PI * 2 / framesPerLoop;
+let noiseTime = 0;
+let noiseWheel = { x: 0, y: 0 };
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -41,6 +47,13 @@ var sketch = new p5(function(p) {
     };
 
     p.draw = function() {
+        noiseWheel.x = Math.cos(noiseTime);
+        noiseWheel.y = Math.sin(noiseTime);
+        noiseTime += noiseIncrement;
+        if (noiseTime > Math.PI * 2) {
+            console.log("yurp!", p.frameCount);
+            noiseTime = 0;
+        }
         scene.update();
     };
 

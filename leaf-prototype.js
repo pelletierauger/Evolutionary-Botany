@@ -85,6 +85,7 @@ let PetioleSegment = function(parent, direction) {
     this.branchedForward = false;
     this.angle = this.parent.angle;
     this.angleDelta = 0;
+    this.swayingDelta = 0;
     this.children = [];
 
     switch (this.petioleIndex) {
@@ -147,7 +148,10 @@ PetioleSegment.prototype.grow = function() {
     if (growth) {
         this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
     }
+    this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
+    // this.petioleIndex
     this.angle = this.parent.angle + this.angleDelta;
+    this.angle += this.swayingDelta;
     //------------------------------------------------------------------------------
 
     //------------------------------------------------------------------------------
