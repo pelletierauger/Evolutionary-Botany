@@ -149,10 +149,28 @@ PetioleSegment.prototype.grow = function() {
         this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
     }
     // this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
+
+    // Basic swaying
     // this.swayingDelta = openSimplex.noise4D(this.angle, this.petioleIndex, noiseWheel.x, noiseWheel.y) * 0.1;
 
-    this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5;
+    // Wilder, nicer, not realistic
+    // this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5;
+
+    this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+    this.swayingDelta = Math.sin(this.swayingDelta * 0.5);
+
+    // this.swayingDelta = openSimplex.noise4D(this.angle * 0.25, this.parent.angle, noiseWheel.x, noiseWheel.y) * 0.5;
+
+    // Robust, smooth
+    // this.swayingDelta = openSimplex.noise4D(this.angle * 0.25, this.parent.segmentID, noiseWheel.x, noiseWheel.y) * 0.5;
+
+
     // this.swayingDelta = openSimplex.noise4D(this.angle * 0.5, this.petioleIndex * 0.1, noiseWheel.x, noiseWheel.y) * 0.5;
+
+
+    // this.swayingDelta = openSimplex.noise3D(0.01 * this.parent.segmentID + this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+    // this.swayingDelta = openSimplex.noise3D(1 * this.parent.segmentID + this.angle * 0.125, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+
 
     // this.petioleIndex
     this.angle = this.parent.angle + this.angleDelta;

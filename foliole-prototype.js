@@ -29,18 +29,23 @@ Foliole.prototype.grow = function() {
     for (let i = 0; i < this.veins.length; i++) {
 
         let growthMap = sketch.map(i, -2, this.veins.length, 0, Math.PI);
-        let growth = Math.sin(growthMap);
+        // let a = this.dna.maxKnotsLevel0;
+        // let g = sketch.map(this.parent.petioluleIndex, 0, a, 1, 0);
+        // console.log("g: ", g);
+        let privateGrowth = Math.sin(growthMap);
         // growth *= Math.sin(growth * 0.5);
         // growth = 1;
         if (this.veins[i].length < this.dna.maxFolioleVeinLength) {
             this.veins[i].length += this.dna.folioleVeinGrowth;
         }
-        this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.0005 : 0.0005;
-        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
-            this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * growth;
+        if (growth) {
+            this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.0005 : 0.0005;
         }
-        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * growth) {
-            this.veins[i].rightExtenderLength += this.dna.folioleExtenderGrowth * growth;
+        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * privateGrowth) {
+            this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * privateGrowth;
+        }
+        if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * privateGrowth) {
+            this.veins[i].rightExtenderLength += this.dna.folioleExtenderGrowth * privateGrowth;
         }
     }
 };

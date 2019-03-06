@@ -6,11 +6,14 @@ let growth = true;
 let growthScalar = 1;
 const seed = Date.now();
 const openSimplex = openSimplexNoise(seed);
-const framesPerLoop = 200;
+const framesPerLoop = 300;
 const noiseIncrement = Math.PI * 2 / framesPerLoop;
 let noiseTime = 0;
 let noiseWheel = { x: 0, y: 0 };
 let exportingFrame = 0;
+let noiseScalar = 1;
+let totalAngle = 0;
+let totalLength = 0;
 
 var sketch = new p5(function(p) {
     p.looping = true;
@@ -50,14 +53,21 @@ var sketch = new p5(function(p) {
     };
 
     p.draw = function() {
+        totalAngle = 0;
+        totalLength = 0;
         noiseWheel.x = Math.cos(noiseTime);
         noiseWheel.y = Math.sin(noiseTime);
+        scene.update();
+        if (noiseTime == 0) {
+            console.log("frameCount: " + p.frameCount);
+            console.log("totalAngle: " + totalAngle);
+            console.log("totalLength: " + totalLength);
+        }
         noiseTime += noiseIncrement;
-        if (noiseTime > Math.PI * 2) {
+        if (noiseTime >= Math.PI * 2 - noiseIncrement) {
             // console.log("yurp!", p.frameCount);
             noiseTime = 0;
         }
-        scene.update();
     };
 
     p.keyPressed = function() {

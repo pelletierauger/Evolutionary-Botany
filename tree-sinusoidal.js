@@ -83,6 +83,7 @@ Segment.prototype.grow = function() {
 
     if (this.isBranch) {
         if (Math.abs(this.angleDelta) < this.dna.branchingAngle) {
+            // console.log("When does this");
             if (this.branchedDirection == "left") {
                 this.angleDelta += 0.005;
                 // this.angleDelta += Math.cos(this.SegmentPosition);
@@ -93,6 +94,7 @@ Segment.prototype.grow = function() {
         }
     }
     if (Math.abs(this.angleDelta) < this.dna.branchingAngle * 0.2) {
+        // console.log("stops?");
         let freq = 1 + this.SegmentPosition * 0.5;
         // freq *= this.dna.branchingAngleFrequencyScalar;
         // freq = (freq * -this.segmentID);
@@ -108,7 +110,13 @@ Segment.prototype.grow = function() {
         }
     }
     // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
-    this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
+    // this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1 * noiseScalar;
+
+    this.swayingDelta = openSimplex.noise4D(this.angle, this.parent.segmentID, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+
+
+
+
     this.angle = this.parent.angle + this.angleDelta;
     this.angle += this.swayingDelta;
     if (this.energy > 0) {
@@ -179,7 +187,9 @@ Segment.prototype.draw = function(x, y) {
 
 Segment.prototype.gatherShapes = function(x, y) {
     let a = this.angle;
+    totalAngle += a;
     let l = this.length;
+    totalLength += l;
     var newX = x + Math.cos(a) * l;
     var newY = y - Math.sin(a) * l;
     // sketch.strokeWeight(sketch.map(this.segmentID, 0, 40, 50, 5));

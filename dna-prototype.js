@@ -30,13 +30,13 @@ let DNA = function() {
     this.folioleProbability = 0.25;
     this.petioleBranchingFrequencyLeft = 4;
     this.petioleBranchingFrequencyRight = 4;
-    this.petioleBranchingOffsetLeft = 0;
+    this.petioleBranchingOffsetLeft = 2;
     this.petioleBranchingOffsetRight = 0;
     this.petioluleDepth = 1;
     this.petioleTerminalFoliole = true;
     this.petioleMaxLeafletAmount = 10;
 
-    this.maxKnotsLevel0 = 5;
+    this.maxKnotsLevel0 = 10;
     this.maxKnotsLevel1 = 20;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;
