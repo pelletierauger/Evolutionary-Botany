@@ -160,12 +160,13 @@ PetioleSegment.prototype.grow = function() {
     // this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
     // this.swayingDelta = Math.sin(this.swayingDelta * 0.5);
 
+    // Very nice, fairly realistic, a bit more happy
+    // this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+    // this.swayingDelta = Math.sin(this.swayingDelta * 0.5) * 1.15;
+
 
     this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
-    this.swayingDelta = Math.sin(this.swayingDelta * 0.5) * 1.15;
-
-
-
+    // this.swayingDelta = this.swayingDelta * 0.5 + Math.sin(this.swayingDelta * 0.5) * 1.25;
 
 
 
