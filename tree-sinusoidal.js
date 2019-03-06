@@ -110,9 +110,9 @@ Segment.prototype.grow = function() {
         }
     }
     // this.angleDelta += (Math.random() > 0.5) ? -0.005 : 0.005;
-    // this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1 * noiseScalar;
+    this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1 * noiseScalar;
 
-    this.swayingDelta = openSimplex.noise4D(this.angle, this.parent.segmentID, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+    // this.swayingDelta = openSimplex.noise4D(this.angle, this.parent.segmentID, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
 
 
 

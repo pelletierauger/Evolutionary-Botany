@@ -156,8 +156,18 @@ PetioleSegment.prototype.grow = function() {
     // Wilder, nicer, not realistic
     // this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5;
 
+    // Very nice, fairly realistic
+    // this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
+    // this.swayingDelta = Math.sin(this.swayingDelta * 0.5);
+
+
     this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
-    this.swayingDelta = Math.sin(this.swayingDelta * 0.5);
+    this.swayingDelta = Math.sin(this.swayingDelta * 0.5) * 1.15;
+
+
+
+
+
 
     // this.swayingDelta = openSimplex.noise4D(this.angle * 0.25, this.parent.angle, noiseWheel.x, noiseWheel.y) * 0.5;
 
