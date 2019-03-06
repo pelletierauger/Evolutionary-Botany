@@ -13,7 +13,7 @@ var exporting = (GET["exporting"] && GET["exporting"] == "true") ? true : false;
 
 function frameExport(p) {
     var fileName = scene.fileName;
-    var formattedFrameCount = "" + scene.frameCount;
+    var formattedFrameCount = "" + exportingFrame;
     while (formattedFrameCount.length < 5) {
         formattedFrameCount = "0" + formattedFrameCount;
     }

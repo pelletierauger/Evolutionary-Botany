@@ -1,5 +1,5 @@
 let Scene = function() {
-    this.fileName = "./frames/scene-001/botany";
+    this.fileName = "./frames/loop-001/botany";
     this.maxFrames = 500;
     this.frameCount = 0;
     this.shapes = [];
@@ -65,14 +65,15 @@ Scene.prototype.update = function() {
     if (this.framePrinted) {
         this.frameCount++;
         sketch.background(200);
+        for (let i = 0; i < this.hills.length; i++) {
+            // this.hills[i].gatherShapes();
+        }
         for (let i = 0; i < this.trees.length; i++) {
             this.trees[i].grow();
             // this.trees[i].grow();
             this.trees[i].gatherShapes();
         }
-        for (let i = 0; i < this.hills.length; i++) {
-            this.hills[i].gatherShapes();
-        }
+
         lll = this.shapes.length;
         this.framePrinted = false;
     }
@@ -93,8 +94,9 @@ Scene.prototype.update = function() {
     }
     if (this.shapes.length == 0) {
         this.framePrinted = true;
-        if (exporting && this.frameCount < this.maxFrames) {
+        if (exporting && exportingFrame < this.maxFrames) {
             frameExport(sketch);
+            exportingFrame += 1;
         }
     }
 };

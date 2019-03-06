@@ -6,18 +6,21 @@ let growth = true;
 let growthScalar = 1;
 const seed = Date.now();
 const openSimplex = openSimplexNoise(seed);
-const framesPerLoop = 100;
+const framesPerLoop = 200;
 const noiseIncrement = Math.PI * 2 / framesPerLoop;
 let noiseTime = 0;
 let noiseWheel = { x: 0, y: 0 };
+let exportingFrame = 0;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.fileName = "./frames/foliage-002/botany";
+    p.pixelDensity(1);
+    p.fileName = "./frames/loop-001/botany";
     p.maxFrames = 450;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
+        // p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
+        p.cnvs = p.createCanvas(p.windowWidth * 9 / 16, p.windowWidth * 9 / 16);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
@@ -30,7 +33,7 @@ var sketch = new p5(function(p) {
         dna = new DNA();
         // dna = new Genotype();
         // dna = dna.geneInterpretation;
-        tree = new Tree(0, 0, dna);
+        tree = new Tree(0, 40, dna);
         // tree = new Tree(-650, 0, dna);
         // tree = new Tree(650, 0, dna);
         // tree = new Tree(0, -p.height / 2 - 100, dna);
@@ -51,7 +54,7 @@ var sketch = new p5(function(p) {
         noiseWheel.y = Math.sin(noiseTime);
         noiseTime += noiseIncrement;
         if (noiseTime > Math.PI * 2) {
-            console.log("yurp!", p.frameCount);
+            // console.log("yurp!", p.frameCount);
             noiseTime = 0;
         }
         scene.update();
@@ -67,9 +70,9 @@ var sketch = new p5(function(p) {
                 p.looping = true;
             }
         }
-        if (p.key == 'p' || p.key == 'P') {
-            frameExport(p);
-        }
+        // if (p.key == 'p' || p.key == 'P') {
+        //     frameExport(p);
+        // }
         if (p.key == 'r' || p.key == 'R') {
             window.location.reload();
         }
@@ -88,6 +91,11 @@ var sketch = new p5(function(p) {
         if (p.key == 'g' || p.key == 'G') {
             growth = !growth;
             growthScalar = (growth) ? 1 : 0;
+        }
+        if (p.key == 'p' || p.key == 'P') {
+            if (!exporting) {
+                exporting = true;
+            }
         }
     };
 });

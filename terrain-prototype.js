@@ -1,5 +1,5 @@
     let Terrain = function() {
-        this.amountOfHills = 10;
+        this.amountOfHills = 20;
         // A float between 0 and 1, 0 being the top of the scene, 1 being the bottom.
         this.horizon = 0.5;
         // A float between 0 and 1, 0 being 0 on the y axis, and 1 being sketch.height;
@@ -22,7 +22,8 @@
     let Hill = function(ind, parent) {
         this.parent = parent;
         this.ind = ind;
-        let top = (parent.height * parent.horizon);
+        let scalar = sketch.map(this.ind, 9, 0, 0, 1);
+        let top = (parent.height * parent.horizon) * scalar;
         let bottom = (parent.height * parent.bottom);
         let baseHeight = sketch.map(ind, 0, parent.amountOfHills, -bottom, top);
         this.basePoint = { x: -parent.width, y: this.parent.depth };
@@ -40,7 +41,10 @@
 
     Hill.prototype.gatherShapes = function() {
         // console.log("Yeah!");
-        scene.registerPolygon(this.points, { r: 0, g: 0, b: 0, a: 50 });
+        let r = sketch.map(this.ind, 9, 0, 0, 100);
+        let g = sketch.map(this.ind, 9, 0, 150, 255);
+        let b = sketch.map(this.ind, 9, 0, 0, 255);
+        scene.registerPolygon(this.points, { r: r, g: g, b: b, a: 255 });
         for (let i = 0; i <  this.points.length; i++) {
             // scene.registerEllipse(this.points[i].x, this.points[i].y);
         }

@@ -148,7 +148,12 @@ PetioleSegment.prototype.grow = function() {
     if (growth) {
         this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
     }
-    this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
+    // this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
+    // this.swayingDelta = openSimplex.noise4D(this.angle, this.petioleIndex, noiseWheel.x, noiseWheel.y) * 0.1;
+
+    this.swayingDelta = openSimplex.noise3D(this.angle * 0.25, noiseWheel.x, noiseWheel.y) * 0.5;
+    // this.swayingDelta = openSimplex.noise4D(this.angle * 0.5, this.petioleIndex * 0.1, noiseWheel.x, noiseWheel.y) * 0.5;
+
     // this.petioleIndex
     this.angle = this.parent.angle + this.angleDelta;
     this.angle += this.swayingDelta;
