@@ -109,3 +109,32 @@ var sketch = new p5(function(p) {
         }
     };
 });
+
+
+
+
+let sky = [
+    { offset: 0, r: 159, g: 107, b: 197 },
+    { offset: 0.5, r: 214, g: 123, b: 163 },
+    { offset: 0.8, r: 199, g: 97, b: 148 },
+    { offset: 0.8, r: 174, g: 89, b: 156 }
+];
+// 199, 97, 148
+
+function printBackgroundGradient() {
+    let ctx = sketch.cnvs.drawingContext;
+    var gradient = ctx.createLinearGradient(sketch.width * 0.5, 0, sketch.width * 0.5, sketch.height);
+    var cols = sky;
+    // console.log(cols);
+    for (var i = 0; i < cols.length; i++) {
+        gradient.addColorStop(cols[i].offset, "rgba(" + cols[i].r + ", " + cols[i].g + ", " + cols[i].b + ",1)");
+        // console.log("How is this not working?");
+    }
+    sketch.noStroke();
+    ctx.fillStyle = gradient;
+    // sketch.rect(-sketch.width * 0.5, -sketch.height * 0.5, sketch.width, sketch.height);
+    sketch.rect(0, 0, sketch.width, sketch.height);
+    // sketch.rect(0, 0, 300, 300);
+    // sketch.fill(0, 0, 255);
+    // sketch.rect(0, 0, 200, 200);
+}

@@ -64,7 +64,8 @@ Scene.prototype.update = function() {
 
     if (this.framePrinted) {
         this.frameCount++;
-        sketch.background(200);
+        // sketch.background(255, 255, 0);
+        printBackgroundGradient();
         for (let i = 0; i < this.hills.length; i++) {
             this.hills[i].gatherShapes();
         }
@@ -103,7 +104,8 @@ Scene.prototype.update = function() {
 
 Scene.prototype.print = function() {
     if (this.shapes.length <= this.shapesPerFrame) {
-        sketch.background(200);
+        // sketch.background(200);
+        printBackgroundGradient();
         sketch.translate(sketch.width / 2, sketch.height - 100);
         sketch.scale(zoomLevel, zoomLevel);
         tree.grow();
@@ -133,6 +135,10 @@ Scene.prototype.printObject = function(obj) {
         // let b = sketch.random(0, 100);
         // sketch.fill(b, 255);
         sketch.fill(obj.col.r, obj.col.g, obj.col.b, obj.col.a);
+        // if (obj.arr[0].y > sketch.height * 0.7) {
+        //     sketch.fill(0);
+        //     console.log(obj.arr[0]);
+        // }
         sketch.beginShape();
         for (let i = 0; i < obj.arr.length; i++) {
             sketch.vertex(obj.arr[i].x, obj.arr[i].y);

@@ -7,9 +7,21 @@ let Foliole = function(parent) {
     this.veinAmount = this.dna.folioleVeinAmount;
     this.veins = [];
     this.createVeins();
-    let c = sketch.random(0, 75);
-    // c = 0;
-    this.col = { r: c, g: c, b: c, a: 255 };
+    // let c = sketch.random(0, 75);
+    // // c = 0;
+    // this.col = { r: c, g: c, b: c, a: 255 };
+
+    // 103, 52, 152
+    let c = Math.random();
+    let red = 103 * c;
+    let green = 52 * c;
+    let blue = 152 * c;
+    this.col = { r: red, g: green, b: blue, a: 255 };
+
+
+
+
+
 };
 
 Foliole.prototype.createVeins = function() {
@@ -120,6 +132,22 @@ Foliole.prototype.gatherShapes = function(x, y) {
 
     // var newX = x + Math.cos(a) * l;
     // var newY = y - Math.sin(a) * l;
-    scene.registerPolygon(contourPoints, this.col);
+    // console.log(finalPoint.y);
+    let m = Math.min(sketch.map(finalPoint.y, -500, -600, 0, 1), 1);
+    let c = this.col;
+    scene.registerPolygon(contourPoints, { r: c.r * m, g: c.g * m, b: c.b * m, a: 255 });
+
+    // if (finalPoint.y > -500) {
+    //     scene.registerPolygon(contourPoints, { r: 0, g: 0, b: 0, a: 255 });
+    //     // console.log("yeah!");
+    //     // console.log()
+    // } else {
+    //     // scene.registerPolygon(contourPoints, { r: 0, g: 0, b: 0, a: 255 });
+    //     scene.registerPolygon(contourPoints, this.col);
+    // }
+
+
+
+    // scene.registerPolygon(contourPoints, this.col);
     // scene.registerEllipse(x, y);
 };

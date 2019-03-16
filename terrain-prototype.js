@@ -22,7 +22,7 @@
     let Hill = function(ind, parent) {
         this.parent = parent;
         this.ind = ind;
-        let scalar = sketch.map(this.ind, 9, 0, 0, 1);
+        let scalar = sketch.map(this.ind, 4, 0, 0, 1);
         let top = (parent.height * parent.horizon) * scalar;
         let bottom = (parent.height * parent.bottom);
         let baseHeight = sketch.map(ind, 0, parent.amountOfHills, -bottom, top);
@@ -41,9 +41,10 @@
 
     Hill.prototype.gatherShapes = function() {
         // console.log("Yeah!");
-        let r = sketch.map(this.ind, 9, 0, 0, 100);
-        let g = sketch.map(this.ind, 9, 0, 150, 255);
-        let b = sketch.map(this.ind, 9, 0, 0, 255);
+        // 103, 52, 152
+        let r = sketch.map(this.ind, 9, 0, 0, 103);
+        let g = sketch.map(this.ind, 9, 0, 0, 52);
+        let b = sketch.map(this.ind, 9, 0, 0, 152);
         scene.registerPolygon(this.points, { r: r, g: g, b: b, a: 255 });
         for (let i = 0; i <  this.points.length; i++) {
             // scene.registerEllipse(this.points[i].x, this.points[i].y);

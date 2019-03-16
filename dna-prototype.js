@@ -51,8 +51,8 @@ let DNA = function() {
     this.petioleMaxSegmentLengthLevel5 = 2;
 
     this.folioleVeinAmount = 20;
-    this.maxFolioleVeinLength = 6 * 0.5;
-    this.maxFolioleWidth = 20 * 0.5;
+    this.maxFolioleVeinLength = 6 * 0.75;
+    this.maxFolioleWidth = 20 * 0.75;
     this.folioleVeinGrowth = 0.1;
     this.folioleExtenderGrowth = 0.5;
 
