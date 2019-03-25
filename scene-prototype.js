@@ -88,8 +88,8 @@ Scene.prototype.update = function() {
             this.shapes = [];
         } else {
             for (let i = 0; i < this.shapesPerFrame; i++) {
-                this.printObject(this.shapes[this.shapes.length - 1]);
-                this.shapes.pop();
+                this.printObject(this.shapes[0]);
+                this.shapes.shift();
             }
         }
     }
