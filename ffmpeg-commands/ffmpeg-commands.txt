@@ -41,3 +41,37 @@ ffmpeg -f image2 -framerate 24 -i ./frames/foliage-003/botany-%05d.png -c:v libx
 ffmpeg -f image2 -framerate 24 -i ./frames/foliage-004/botany-%05d.png -c:v libx264 -s 1440x1440 -pix_fmt yuv420p ./video-renders/foliage-004.mp4
 
 ffmpeg -f image2 -framerate 24 -i ./frames/scene-001/botany-%05d.png -c:v libx264 -s 2560x1440 -pix_fmt yuv420p ./video-renders/scene-001.mp4
+
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-001/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/short-film-001.mp4
+
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-001/botany-%05d.png -vf "gblur=sigma=10" ./frames/short-film-001-blur/botany-%05d.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-002/botany-%05d.png -vf "gblur=sigma=10" ./frames/short-film-002-blur/botany-%05d.png
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-001-blur/botany-00001.png -vf "colorlevels=rimax=0.7:gimax=0.7:bimax=0.7" blur-bright.png
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-001-blur/botany-%05d.png -vf "colorlevels=rimax=0.7:gimax=0.7:bimax=0.7" ./frames/short-film-001-blur-bright/botany-%05d.png
+
+short-film-001-blur-bright
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-001-composite/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/short-film-001-composite.mp4
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-002-blur/botany-%05d.png -vf "colorlevels=rimax=0.7:gimax=0.7:bimax=0.7" ./frames/short-film-002-blur-bright/botany-%05d.png
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-002-composite/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/short-film-002-composite.mp4
+
+
+//BLUR IT
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-003/botany-%05d.png -vf "gblur=sigma=10" ./frames/short-film-003-blur/botany-%05d.png
+
+//BRIGHTEN THE BLUR
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-003-blur/botany-%05d.png -vf "colorlevels=rimax=0.7:gimax=0.7:bimax=0.7" ./frames/short-film-003-blur-bright/botany-%05d.png
+
+
+ffmpeg -f image2 -framerate 30 -i ./frames/short-film-003-composite/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/short-film-003-composite.mp4
