@@ -13,9 +13,9 @@ let Foliole = function(parent) {
 
     // 103, 52, 152
     let c = Math.random();
-    let red = 103 * c;
-    let green = 52 * c;
-    let blue = 152 * c;
+    let red = 73 * c;
+    let green = 102 * c;
+    let blue = 252 * c;
     this.col = { r: red, g: green, b: blue, a: 255 };
 
 
@@ -51,7 +51,7 @@ Foliole.prototype.grow = function() {
             this.veins[i].length += this.dna.folioleVeinGrowth;
         }
         if (growth) {
-            this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.0005 : 0.0005;
+            this.veins[i].angleDelta += (Math.random() < 0.5) ? -0.0025 : 0.0025;
         }
         if (this.veins[i].leftExtenderLength < this.dna.maxFolioleWidth * privateGrowth) {
             this.veins[i].leftExtenderLength += this.dna.folioleExtenderGrowth * privateGrowth;

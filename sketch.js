@@ -6,7 +6,7 @@ let growth = true;
 let growthScalar = 1;
 const seed = Date.now();
 const openSimplex = openSimplexNoise(seed);
-const framesPerLoop = 300;
+const framesPerLoop = 1000;
 const noiseIncrement = Math.PI * 2 / framesPerLoop;
 let noiseTime = 0;
 let noiseWheel = { x: 0, y: 0 };
@@ -17,13 +17,13 @@ let totalLength = 0;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.pixelDensity(1);
+    // p.pixelDensity(1);
     p.fileName = "./frames/loop-001/botany";
     p.maxFrames = 450;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        // p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
-        p.cnvs = p.createCanvas(p.windowWidth * 9 / 16, p.windowWidth * 9 / 16);
+        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
+        // p.cnvs = p.createCanvas(p.windowWidth * 9 / 16, p.windowWidth * 9 / 16);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
@@ -36,7 +36,13 @@ var sketch = new p5(function(p) {
         dna = new DNA();
         // dna = new Genotype();
         // dna = dna.geneInterpretation;
-        tree = new Tree(0, 40, dna);
+        tree = new Tree(0, 140, dna);
+
+        tree = new Tree(-800, 350, dna);
+        tree = new Tree(800, 300, dna);
+        tree = new Tree(400, 800, dna);
+
+
         // tree = new Tree(-650, 0, dna);
         // tree = new Tree(650, 0, dna);
         // tree = new Tree(0, -p.height / 2 - 100, dna);

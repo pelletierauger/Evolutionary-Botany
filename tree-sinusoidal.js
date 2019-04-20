@@ -18,7 +18,16 @@ Tree.prototype.grow = function() {
 };
 
 Tree.prototype.gatherShapes = function() {
-    this.root.gatherShapes(this.pos.x, this.pos.y);
+    let t = (scene.frameCount + this.pos.x) * 0.02;
+    let s = 250;
+    let t2 = (scene.frameCount + this.pos.x) * 0.7;
+    let s2 = 4;
+    let cameraX = ((sketch.noise(t) - 0.5) * s) + sketch.noise(t2) * s2;
+    let cameraY = ((sketch.noise(t + 50) - 0.5) * s) + sketch.noise(t2 + 10) * s2;
+
+
+
+    this.root.gatherShapes(this.pos.x + cameraX * 0.5, this.pos.y + cameraY * 0.5);
 };
 
 Tree.prototype.draw = function() {
@@ -118,7 +127,7 @@ Segment.prototype.grow = function() {
 
 
     this.angle = this.parent.angle + this.angleDelta;
-    this.angle += this.swayingDelta;
+    // this.angle += this.swayingDelta;
     if (this.energy > 0) {
         if (this.lastBranching == "forward") {
             this.length += this.dna.branchGrowth * growthScalar;;

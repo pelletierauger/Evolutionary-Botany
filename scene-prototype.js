@@ -1,6 +1,6 @@
 let Scene = function() {
-    this.fileName = "./frames/loop-001/botany";
-    this.maxFrames = 500;
+    this.fileName = "./frames/short-film-003/botany";
+    this.maxFrames = 350;
     this.frameCount = 0;
     this.shapes = [];
     this.shapesPerFrame = 10000;
@@ -80,7 +80,14 @@ Scene.prototype.update = function() {
     }
     if (!this.framePrinted) {
         sketch.translate(sketch.width / 2, sketch.height - 50);
-        sketch.scale(zoomLevel, zoomLevel);
+        sketch.scale(zoomLevel * 1.1, zoomLevel * 1.1);
+        let t = this.frameCount * 0.01;
+        let s = 350;
+        let t2 = this.frameCount * 0.5;
+        let s2 = 5;
+        let cameraX = ((sketch.noise(t) - 0.5) * s) + sketch.noise(t2) * s2;
+        let cameraY = ((sketch.noise(t + 50) - 0.5) * s) + sketch.noise(t2 + 10) * s2;
+        sketch.translate(cameraX * 0.5, cameraY * 0.5);
         if (this.shapes.length <= this.shapesPerFrame) {
             for (let i = 0; i < this.shapes.length; i++) {
                 this.printObject(this.shapes[i]);

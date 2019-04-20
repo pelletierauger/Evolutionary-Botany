@@ -146,7 +146,7 @@ PetioleSegment.prototype.grow = function() {
         }
     }
     if (growth) {
-        this.angleDelta += (Math.random() > 0.5) ? -0.0015 : 0.0015;
+        this.angleDelta += (Math.random() > 0.5) ? -0.00015 : 0.00015;
     }
     // this.swayingDelta = openSimplex.noise3D(this.angle, noiseWheel.x, noiseWheel.y) * 0.1;
 
@@ -171,8 +171,8 @@ PetioleSegment.prototype.grow = function() {
 
 
     // Groovy and more harmonious
-    this.swayingDelta = openSimplex.noise4D(this.angle * 0.1, this.petioluleIndex * 0.05, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
-    this.swayingDelta = this.swayingDelta * 0.5 + Math.sin(this.swayingDelta * 1.5) * 1.25;
+    this.swayingDelta = openSimplex.noise4D(this.angle * 0.1, this.petioluleIndex * 0.05, noiseWheel.x, noiseWheel.y) * 0.125 * noiseScalar;
+    this.swayingDelta = this.swayingDelta * 0.125 + Math.sin(this.swayingDelta * 1.5) * 0.125;
 
 
 
@@ -191,7 +191,7 @@ PetioleSegment.prototype.grow = function() {
 
     // this.petioleIndex
     this.angle = this.parent.angle + this.angleDelta;
-    this.angle += this.swayingDelta;
+    // this.angle += this.swayingDelta;
     //------------------------------------------------------------------------------
 
     //------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
         // A float between 0 and 1, 0 being the top of the scene, 1 being the bottom.
         this.horizon = 0.5;
         // A float between 0 and 1, 0 being 0 on the y axis, and 1 being sketch.height;
-        this.bottom = 0.1;
+        this.bottom = -0.25;
         this.width = 1300;
         this.depth = 1000;
         this.unit = 10;
@@ -22,7 +22,7 @@
     let Hill = function(ind, parent) {
         this.parent = parent;
         this.ind = ind;
-        let scalar = sketch.map(this.ind, 4, 0, 0, 1);
+        let scalar = sketch.map(this.ind, 4, 0, 0, 4);
         let top = (parent.height * parent.horizon) * scalar;
         let bottom = (parent.height * parent.bottom);
         let baseHeight = sketch.map(ind, 0, parent.amountOfHills, -bottom, top);
