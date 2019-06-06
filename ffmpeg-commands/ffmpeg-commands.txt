@@ -75,3 +75,37 @@ ffmpeg -f image2 -framerate 30 -i ./frames/short-film-003-blur/botany-%05d.png -
 
 
 ffmpeg -f image2 -framerate 30 -i ./frames/short-film-003-composite/botany-%05d.png -c:v libx264 -pix_fmt yuv420p ./video-renders/short-film-003-composite.mp4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/frames/line-002/evolutionary-botany-%05d.png
+
+ffmpeg -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage.mp4 /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage.gif
+
+ffmpeg -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage.mp4 -s 720x720 /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage-frames/montage-%05d.png
+
+ffmpeg -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage-frames/montage-%05d.png
+
+ffmpeg -f image2 -framerate 30 -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage-frames/montage-%05d.png -vf palettegen /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/montage-palette.png
+
+ffmpeg -f image2 -framerate 30 -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/branchings-montage-frames/montage-%05d.png -i /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/montage-palette.png -lavfi paletteuse /Users/guillaumepelletier/Desktop/Dropbox/Art/p5/Evolutionary-Botany/video-renders/new-montage.gif
+
+gifsicle -O3 --lossy=50 -o new-montage-lossy50.gif new-montage.gif
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -i palette-004.png -lavfi paletteuse -s 720x720 ./video-renders/evolutionary-botany-line-004.gif
+
+
+ffmpeg -f image2 -framerate 24 -i ./frames/line-004/evolving-botany-%05d.png -vf palettegen palette-004.png
