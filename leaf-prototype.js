@@ -171,8 +171,8 @@ PetioleSegment.prototype.grow = function() {
 
 
     // Groovy and more harmonious
-    this.swayingDelta = openSimplex.noise4D(this.angle * 0.1, this.petioluleIndex * 0.05, noiseWheel.x, noiseWheel.y) * 0.5 * noiseScalar;
-    this.swayingDelta = this.swayingDelta * 0.5 + Math.sin(this.swayingDelta * 1.5) * 1.25;
+    this.swayingDelta = openSimplex.noise4D(this.parent.angle * 0.1 + this.angle * 0.25, this.angle * 0.05, noiseWheel.x * Math.sin(this.parent.angle * 0.1) * 2, noiseWheel.y * Math.cos(this.parent.angle * 0.1) * 2) * 0.5 * noiseScalar;
+    this.swayingDelta = this.swayingDelta * 0.5 + Math.sin(this.swayingDelta * 3.5) * 0.25;
 
 
 

@@ -101,11 +101,11 @@ Segment.prototype.grow = function() {
         freq = Math.pow(freq, this.dna.branchingAngleFrequencyScalar);
         if (growth) {
             if (this.lastBranching == "left") {
-                this.angleDelta += (Math.cos(freq) * 0.001);
+                this.angleDelta += (Math.cos(freq * 2) * 0.005);
             } else if (this.lastBranching == "right") {
-                this.angleDelta -= (Math.cos(freq) * 0.001);
+                this.angleDelta -= (Math.cos(freq * 2) * 0.005);
             } else if (this.lastBranching == "forward") {
-                this.angleDelta -= (Math.cos(freq) * 0.001) * this.coin;
+                this.angleDelta -= (Math.cos(freq * 2) * 0.005) * this.coin;
             }
         }
     }
