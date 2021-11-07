@@ -36,7 +36,7 @@ let DNA = function() {
     this.petioleTerminalFoliole = true;
     this.petioleMaxLeafletAmount = 10;
 
-    this.maxKnotsLevel0 = 5;
+    this.maxKnotsLevel0 = 10;
     this.maxKnotsLevel1 = 10;
     this.maxKnotsLevel2 = 3;
     this.maxKnotsLevel3 = 5;

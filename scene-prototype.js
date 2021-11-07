@@ -1,6 +1,6 @@
 let Scene = function() {
-    this.fileName = "./frames/loop-001/botany";
-    this.maxFrames = 500;
+    this.fileName = "/Volumes/Volumina/frames/phase-2/dusk/dusk";
+    this.maxFrames = 2500;
     this.frameCount = 0;
     this.shapes = [];
     this.shapesPerFrame = 10000;

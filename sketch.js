@@ -23,7 +23,7 @@ var sketch = new p5(function(p) {
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
         // p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
-        p.cnvs = p.createCanvas(p.windowWidth * 9 / 16, p.windowWidth * 9 / 16);
+        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth * 9 / 16);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
         p.frameRate(30);
@@ -67,6 +67,10 @@ var sketch = new p5(function(p) {
         if (noiseTime >= Math.PI * 2 - noiseIncrement) {
             // console.log("yurp!", p.frameCount);
             noiseTime = 0;
+        }
+        if (p.frameCount == 245) {
+            growth = !growth;
+            growthScalar = (growth) ? 1 : 0;
         }
     };
 
