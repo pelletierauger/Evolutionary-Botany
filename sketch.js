@@ -2,14 +2,14 @@ let tree;
 
 var sketch = new p5(function(p) {
     p.looping = true;
-    p.fileName = "./frames/line-004/evolving-botany";
-    p.maxFrames = 550;
+    p.fileName = "/Volumes/Volumina/frames/phase-2/evolving-botany-2/evolving-botany-2";
+    p.maxFrames = 1550;
     p.setup = function() {
         p.socket = io.connect('http://localhost:8080');
-        p.cnvs = p.createCanvas(p.windowWidth / 16 * 9, p.windowWidth / 16 * 9);
+        p.cnvs = p.createCanvas(p.windowWidth, p.windowWidth / 16 * 9);
         p.ctx = p.cnvs.drawingContext;
         p.canvasDOM = document.getElementById('defaultCanvas0');
-        if (!exporting)  {
+        if (!exporting) {
             p.frameRate(30);
         } else {
             p.frameRate(1);
@@ -29,7 +29,7 @@ var sketch = new p5(function(p) {
     p.draw = function() {
         p.background(200, 50);
         // let s = p.map(p.frameCount, 0, 200, 1, 0.9);
-        p.translate(p.width /  2, p.height - 20);
+        p.translate(p.width / 2, p.height - 20);
         p.scale(0.3, 0.3);
         tree.grow();
         tree.draw();
